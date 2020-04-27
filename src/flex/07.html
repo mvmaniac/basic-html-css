@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07. 유용한 기법들 - 2</title>
+  <link rel="stylesheet" href="default.css">
+  <style>
+    .flex-container {
+      display: flex;
+    }
+
+    .flex-item:nth-child(1) {
+      flex: 0 0 auto;
+      /* flex-shrink: 0; */
+      width: 150px;
+    }
+
+    .flex-item:nth-child(2) {
+      flex: 1 1 auto;
+      /* flex-grow: 1; */
+    }
+
+    .flex-item:nth-child(3) {
+      flex: 0 0 auto;
+      /* flex-shrink: 0; */
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex-container">
+		<div class="flex-item">
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti, molestiae.
+		</div>
+		<div class="flex-item">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ex cum tenetur ea commodi inventore nam doloribus dolores sit saepe.
+		</div>
+		<div class="flex-item">
+			Lorem ipsum dolor sit, amet consectetur adipisicing.
+		</div>
+	</div>
+</body>
+</html>
