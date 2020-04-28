@@ -12,6 +12,25 @@
 
 *
 
-### 4. etc
+### 4. Setting
 
-* 
+* lite-server
+
+    ``` javascript
+    npm i -D lite-server
+    ```
+
+* eslint & prettier
+
+    ``` javascript
+    npm i -D eslint
+    npm i -D eslint-config-airbnb-base eslint-plugin-import
+    npm i -D prettier eslint-config-prettier eslint-plugin-prettier
+    ```
+
+* html & css (어떤 용도일까...)
+
+    ``` javascript
+    npm i -D eslint-plugin-html
+    npm i -D eslint-plugin-css-modules
+    ```
