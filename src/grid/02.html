@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02. 자동으로 채우기</title>
+  <link rel="stylesheet" href="default.css">
+
+  <style>
+    .grid-container-1 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, minmax(100px, auto));
+    }
+
+    .grid-container-2 {
+      display: grid;
+      /* grid-template-columns: repeat(auto-fill, minmax(200px, auto)); */
+      grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-container grid-container-1">
+    <div class="grid-item">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, qui.
+    </div>
+    <div class="grid-item">B</div>
+    <div class="grid-item">C</div>
+    <div class="grid-item">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum commodi, amet eligendi consectetur dolores quae,
+      omnis nulla debitis reprehenderit voluptatum sapiente impedit culpa dolor voluptatem pariatur minima non. Modi cum
+      perferendis enim a iure eos voluptate, maxime voluptatibus dolor voluptatum.
+    </div>
+    <div class="grid-item">E</div>
+    <div class="grid-item">F</div>
+    <div class="grid-item">G</div>
+    <div class="grid-item">H</div>
+    <div class="grid-item">I</div>
+  </div>
+
+  <div class="grid-container grid-container-2">
+		<div class="grid-item">A</div>
+		<div class="grid-item">B</div>
+		<div class="grid-item">C</div>
+		<div class="grid-item">D</div>
+		<div class="grid-item">E</div>
+		<div class="grid-item">F</div>
+		<div class="grid-item">G</div>
+		<div class="grid-item">H</div>
+		<div class="grid-item">I</div>
+	</div>
+</body>
+
+</html>
