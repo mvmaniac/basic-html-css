@@ -52,6 +52,10 @@
 }
 
 /* bullet list */
+.info-list {
+	margin-bottom: 2rem;
+}
+
 .info-list-item {
   display: flex;
   margin: 0.5em 0;
@@ -63,6 +67,10 @@
 }
 
 /* message */
+.user-list {
+	margin-bottom: 2rem;
+}
+
 .user-item {
   display: flex;
   margin-bottom: 1.5em;
