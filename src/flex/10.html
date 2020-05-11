@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10. Flex Sortable</title>
+  <link rel="stylesheet" href="default.css">
+  <style>
+    .flex-container {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .item {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      margin: 2px;
+    }
+
+    .item-select {
+      border: 3px solid darkorange;
+      z-index: 1;
+    }
+
+    .sortable-ghost {
+      background-color: red;
+    }
+
+    .sortable-chosen {
+      background-color: green;
+    }
+
+    .sortable-drag {
+      background-color: blue;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" class="flex-container">
+    <div class="flex-item item">AA</div>
+    <div class="flex-item item">BB</div>
+    <div class="flex-item item">CC</div>
+    <div class="flex-item item">DD</div>
+    <div class="flex-item item">EE</div>
+    <div class="flex-item item">FF</div>
+    <div class="flex-item item">GG</div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="js/Sortable.js"></script>
+  <script>
+    var sortObj;
+
+    $(function () {
+      var container = document.getElementById('container');
+
+      // $('div.flex-container').on('click', 'div.item', function () {
+      //   var $this = $(this);
+
+      //   if ($this.hasClass('item-select')) {
+      //     $this.removeClass('item-select');
+      //     return;
+      //   }
+
+      //   $this.addClass('item-select');
+
+      // });
+
+      try {
+        sortObj = Sortable.create(container, {
+          multiDrag: true,
+          selectedClass: 'item-select',
+          multiDragKey: 'ctrl',
+          animation: 150,
+          fallbackTolerance: 4,
+          onSelect: function (evt) {
+            var $item = $(evt.item);
+          },
+          onDeselect: function (evt) {
+            var $item = $(evt.item);
+          },
+          onChoose: function (evt) {
+            var $item = $(evt.item);
+          },
+          onEnd: function (evt) {
+            for (let i in evt.items) {
+              Sortable.utils.deselect(evt.items[i]);
+            }
+          },
+          onMove: function (evt, originalEvent) {
+            var $item = $(evt.dragged);
+            if (!$item.hasClass('item-select')) {
+              return false;
+            }
+          }
+        });
+      } catch (error) {
+        alert('드래그 중 에러 발생...');
+      }
+
+      console.log(sortObj);
+    });
+
+    function addItem() {
+      $('#container').append('<div class="flex-item item">II</div>');
+    }
+  </script>
+</body>
+
+</html>

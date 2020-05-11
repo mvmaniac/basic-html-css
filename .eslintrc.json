@@ -27,5 +27,6 @@
     "prettier/prettier": ["error"],
     "no-unused-vars": ["warn"],
     "no-underscore-dangle": ["warn"]
-  }
+  },
+  "ignorePatterns": ["src/flex/10.html", "**/*.js"]
 }
