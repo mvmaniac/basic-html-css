@@ -6,6 +6,5 @@
   "trailingComma": "none",
   "printWidth": 80,
   "bracketSpacing": false,
-  "arrowParens": "always",
-  "vueIndentScriptAndStyle": true
+  "arrowParens": "always"
 }
