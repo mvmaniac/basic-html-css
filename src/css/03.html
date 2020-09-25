@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation</title>
+  <link rel="stylesheet" href="default.css">
+  <style>
+    body {
+      padding: 10px;
+    }
+
+    @keyframes sample-ani {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(300px, 0);
+      }
+      100% {
+        transform: translate(400px, 500px);
+      }
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #000;
+      background: #fff000;
+      /* animation: sample-ani 3s linear infinite alternate; */
+      animation: sample-ani 3s linear forwards;
+    }
+
+    .box:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">Box</div>
+</body>
+</html>
