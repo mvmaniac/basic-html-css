@@ -320,11 +320,10 @@
       });
     });
 
-    //TODO: SD
     function changeCheckStateItem($item, isChecked) {
       var $checkBox = $item.find('div.item-check input:checkbox');
 
-      // TODO: 더 좋은 방법
+      // TODO: 더 좋은 방법?
       // setTimeout를 하지 않으면 현재 선택된 아이템의 정보를 가져 올 수 없음
       setTimeout(function () {
         $checkBox.prop('checked', isChecked);
