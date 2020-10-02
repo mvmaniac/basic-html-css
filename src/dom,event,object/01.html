@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM 스크립트</title>
+  <link rel="stylesheet" href="css/default.css">
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .characters {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #fff000;
+    }
+
+    .ilbuni {
+      width: 100px;
+      cursor: pointer;
+    }
+    
+    .characters .ilbuni {
+      display: inline-block;
+    }
+    
+    .special {
+      border: 10px dashed red;
+    }
+</style>
+</head>
+<body>
+  <div class="characters">
+    <div class="ilbuni a">
+        <img src="images/ilbuni_0.png" alt="일분이">
+    </div>
+    <div class="ilbuni b">
+        <img src="images/ilbuni_1.png" alt="일분이">
+    </div>
+    <div class="ilbuni c">
+        <img src="images/ilbuni_2.png" alt="일분이">
+    </div>
+  </div>
+  <div class="ilbuni d">
+    <img src="images/ilbuni_3.png" alt="일분이">
+  </div>
+
+  <script>
+    // create & append
+    const pElem = document.createElement('p');
+    pElem.innerHTML = '<a href="#">안녕</a>???';
+
+    const charactersElem = document.querySelector('.characters');
+    charactersElem.append(pElem);
+
+    // remove
+    charactersElem.removeChild(document.querySelector('.b'));
+
+    // css add
+    const ilbuniA = document.querySelector('.ilbuni');
+    ilbuniA.classList.add('special');
+
+    // css remove
+    const ilbuniC = document.querySelector('.ilbuni.c');
+    ilbuniC.classList.remove('ilbuni');
+  </script>
+</body>
+</html>
