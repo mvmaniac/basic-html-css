@@ -1,12 +1,8 @@
 html {
-	font-family: 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
-	color: #555;
-	line-height: 1.2;
-	word-wrap: break-word;
+  height: 100%;
 }
 body {
-	background: #eee;
-	-webkit-font-smoothing: antialiased;
+  min-height: 100%;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
