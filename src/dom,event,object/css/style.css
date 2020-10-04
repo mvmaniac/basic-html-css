@@ -1,0 +1,79 @@
+body {
+  font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
+  -webkit-overflow-scrolling: touch;
+  color: #555;
+  background: #fff000;
+}
+
+.world {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+}
+
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+
+.house {
+  width: 100vw;
+  height: 100vh;
+  transform: translate3d(0, 0, -490vw);
+  transform-style: preserve-3d;
+}
+
+.wall {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.wall-left {
+  width: 1000vw;
+  background: #f8f8f8;
+  transform: rotateY(90deg) translate3d(0, 0, -500vw);
+}
+
+.wall-right {
+  width: 1000vw;
+  background: #f8f8f8;
+  transform: rotateY(90deg) translate3d(0, 0, -400vw);
+}
+
+.wall-front-a {
+  transform: translate3d(0, 0, 300vw);
+}
+
+.wall-front-b {
+  transform: translate3d(0, 0, 50vw);
+}
+
+.wall-front-c {
+  transform: translate3d(0, 0, -200vw);
+}
+
+.wall-front-d {
+  transform: translate3d(0, 0, -500vw);
+}
+
+.wall-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wall-title {
+  font-size: 5rem;
+}
