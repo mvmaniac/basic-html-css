@@ -28,5 +28,5 @@
     "no-unused-vars": ["warn"],
     "no-underscore-dangle": ["warn"]
   },
-  "ignorePatterns": ["src/flex/10.html", "**/*.js"]
+  "ignorePatterns": ["src/flex/10.html", "src/flex/*.js"]
 }
