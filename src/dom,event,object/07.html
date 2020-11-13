@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이벤트 Transition, Animation</title>
-  <link rel="stylesheet" href="css/reset.css">
-  <style>
-    .ball {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 30px;
-      height: 30px;
-      /* margin: -15px 0 0 -15px; */ /* css로 센터 표시 */
-      border-radius: 50%;
-      background: red;
-      transition: 1s;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트 Transition, Animation</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      .ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        /* margin: -15px 0 0 -15px; */ /* css로 센터 표시 */
+        border-radius: 50%;
+        background: red;
+        transition: 1s;
+      }
 
-    .ball.end {
-      background: dodgerblue;
-    }
-  </style>
-</head>
-<body>
-  <div class="ball"></div>
-  <script>
-    const ballElem = document.querySelector('.ball');
+      .ball.end {
+        background: dodgerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <script>
+      const ballElem = document.querySelector('.ball');
 
-    function clickHandler(event) {
-      ballElem.style.transform = `translate(
+      function clickHandler(event) {
+        ballElem.style.transform = `translate(
         ${event.clientX - 15}px, 
         ${event.clientY - 15}px
       )`;
-    }
+      }
 
-    function ballStartHandler(event) {
-      console.log(event);
-    }
+      function ballStartHandler(event) {
+        console.log(event);
+      }
 
-    function ballEndHandler(event) {
-      ballElem.classList.add('end');
-      console.log(event.elapsedTime); // transition의 duration 값
-      console.log(event.propertyName); // 바뀐 속성명
-    }
+      function ballEndHandler(event) {
+        ballElem.classList.add('end');
+        console.log(event.elapsedTime); // transition의 duration 값
+        console.log(event.propertyName); // 바뀐 속성명
+      }
 
-    window.addEventListener('click', clickHandler);
-    ballElem.addEventListener('transitionstart', ballStartHandler);
-    ballElem.addEventListener('transitionend', ballEndHandler);
-  </script>
-</body>
+      window.addEventListener('click', clickHandler);
+      ballElem.addEventListener('transitionstart', ballStartHandler);
+      ballElem.addEventListener('transitionend', ballEndHandler);
+    </script>
+  </body>
 </html>

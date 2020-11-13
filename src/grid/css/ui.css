@@ -25,7 +25,7 @@
 }
 
 .menu-link:hover {
-  color: white
+  color: white;
 }
 
 /* search */
@@ -53,7 +53,7 @@
 
 /* bullet list */
 .info-list {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .info-list-item {
@@ -68,7 +68,7 @@
 
 /* message */
 .user-list {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .user-item {
@@ -85,7 +85,7 @@
   border-radius: 50%;
   background-color: gold;
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
   background-size: 150%;
 }
 
@@ -134,7 +134,7 @@
 .card-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, auto));
-  gap: 2%
+  gap: 2%;
 }
 
 .card-item {

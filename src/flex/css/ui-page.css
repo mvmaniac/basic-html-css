@@ -39,7 +39,7 @@
 
 .modal {
   display: none;
-  top: 80px
+  top: 80px;
 }
 
 #modal-switch:checked ~ .modal {
@@ -64,8 +64,8 @@ label[for='modal-switch']:before {
   cursor: pointer;
 }
 
-#modal-switch:checked ~ label[for='modal-switch']:before  {
-  color: dodgerblue
+#modal-switch:checked ~ label[for='modal-switch']:before {
+  color: dodgerblue;
 }
 
 #modal-switch,
@@ -117,7 +117,7 @@ label[for='modal-switch'] span {
 
 @media (min-width: 1400px) {
   .primary {
-    width: calc(100% - 600px); 
+    width: calc(100% - 600px);
   }
 
   .secondary {

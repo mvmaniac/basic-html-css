@@ -1,415 +1,439 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10. Flex Sortable</title>
+    <link rel="stylesheet" href="css/default.css" />
+    <style>
+      .flex-container {
+        display: flex;
+        flex-flow: row wrap;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10. Flex Sortable</title>
-  <link rel="stylesheet" href="css/default.css">
-  <style>
-    .flex-container {
-      display: flex;
-      flex-flow: row wrap;
-    }
+      .item {
+        order: 1;
+        position: relative;
+        width: 300px;
+        height: 372px;
+        margin: 2px;
+      }
 
-    .item {
-      order: 1;
-      position: relative;
-      width: 300px;
-      height: 372px;
-      margin: 2px;
-    }
+      .item-select {
+        border: 3px solid darkorange;
+      }
 
-    .item-select {
-      border: 3px solid darkorange;
-    }
+      .item-image {
+        width: 294px;
+        /* margin(2) - border(3) - 1 */
+        height: 200px;
+        border: 2px solid white;
+        cursor: pointer;
+      }
 
-    .item-image {
-      width: 294px;
-      /* margin(2) - border(3) - 1 */
-      height: 200px;
-      border: 2px solid white;
-      cursor: pointer;
-    }
+      .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-    .item-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+      .item-check {
+        width: 294px;
+        /* margin(2) - border(3) - 1 */
+        height: 30px;
+        margin-top: 0.5em;
+        border: 2px solid white;
+      }
 
-    .item-check {
-      width: 294px;
-      /* margin(2) - border(3) - 1 */
-      height: 30px;
-      margin-top: 0.5em;
-      border: 2px solid white;
-    }
+      .item-title {
+        width: 294px;
+        /* margin(2) - border(3) - 1 */
+        height: 30px;
+        margin-top: 0.5em;
+        border: 2px solid white;
+      }
 
-    .item-title {
-      width: 294px;
-      /* margin(2) - border(3) - 1 */
-      height: 30px;
-      margin-top: 0.5em;
-      border: 2px solid white;
-    }
+      .item-description {
+        width: 294px;
+        /* margin(2) - border(3) - 1 */
+        height: 82px;
+        margin-top: 0.5em;
+        border: 2px solid white;
+      }
 
-    .item-description {
-      width: 294px;
-      /* margin(2) - border(3) - 1 */
-      height: 82px;
-      margin-top: .5em;
-      border: 2px solid white;
-    }
+      .item-file {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        order: 10;
+        padding: 10px;
+        border: 0;
+        color: white;
+        background-color: lightgray;
+        cursor: pointer;
+      }
 
-    .item-file {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      order: 10;
-      padding: 10px;
-      border: 0;
-      color: white;
-      background-color: lightgray;
-      cursor: pointer;
-    }
+      .item-file .file-drop-zone {
+        width: 200px;
+        height: 200px;
+        border: 3px dashed white;
+        background-color: mediumseagreen;
+      }
 
-    .item-file .file-drop-zone {
-      width: 200px;
-      height: 200px;
-      border: 3px dashed white;
-      background-color: mediumseagreen;
-    }
+      .button-custom {
+        display: inline-block;
+        margin: 0.2em;
+        border-radius: 0.3em;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
 
-    .button-custom {
-      display: inline-block;
-      margin: 0.2em;
-      border-radius: 0.3em;
-      font-weight: bold;
-      color: white;
-      text-decoration: none;
-    }
+      .button-custom:active {
+        transform: translateY(1px);
+      }
 
-    .button-custom:active {
-      transform: translateY(1px);
-    }
+      .button-custom-middle {
+        padding: 0.4em;
+      }
 
-    .button-custom-middle {
-      padding: 0.4em;
-    }
+      .button-custom-blue {
+        background-color: #2377ec;
+      }
 
-    .button-custom-blue {
-      background-color: #2377ec;
-    }
+      /* default css overwrite */
+      .flex-item {
+        padding: 0;
+      }
 
-    /* default css overwrite */
-    .flex-item {
-      padding: 0;
-    }
-
-    /* IE10+ */
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* IE10+ */
+      @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
         .item-image img {
-            display: block;
-            position: relative;
-            top: 50%;
-            left: 50%;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 100%;
-            transform: translate(-50%, -50%);
+          display: block;
+          position: relative;
+          top: 50%;
+          left: 50%;
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+          transform: translate(-50%, -50%);
         }
-    }
+      }
+    </style>
+  </head>
 
-  </style>
-</head>
+  <body>
+    <div id="container" class="flex-container">
+      <div class="flex-item item" data-id="1">
+        <div class="item-image">이미지 영역1</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem1" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목1</div>
+        <div class="item-description">설명1</div>
+      </div>
+      <div class="flex-item item" data-id="2">
+        <div class="item-image">이미지 영역2</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem2" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목2</div>
+        <div class="item-description">설명2</div>
+      </div>
+      <div class="flex-item item" data-id="3">
+        <div class="item-image">이미지 영역3</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem3" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목3</div>
+        <div class="item-description">설명3</div>
+      </div>
+      <div class="flex-item item" data-id="4">
+        <div class="item-image">이미지 영역4</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem4" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목4</div>
+        <div class="item-description">설명4</div>
+      </div>
+      <div class="flex-item item" data-id="5">
+        <div class="item-image">이미지 영역5</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem5" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목5</div>
+        <div class="item-description">설명5</div>
+      </div>
+      <div class="flex-item item" data-id="6">
+        <div class="item-image">이미지 영역6</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem6" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목6</div>
+        <div class="item-description">설명6</div>
+      </div>
+      <div class="flex-item item" data-id="7">
+        <div class="item-image">이미지 영역7</div>
+        <div class="item-check">
+          <input type="checkbox" id="checkItem7" />체크(실제로는 안보임)
+        </div>
+        <div class="item-title">제목7</div>
+        <div class="item-description">설명7</div>
+      </div>
+      <div class="flex-item item item-file">
+        <div id="fileDropZone" class="file-drop-zone">파일 업로드 영역</div>
+        <input
+          type="file"
+          id="fileUpload"
+          name="fileUpload"
+          accept="image/*"
+          multiple
+          style="display: none"
+        />
+      </div>
+    </div>
 
-<body>
-  <div id="container" class="flex-container">
-    <div class="flex-item item" data-id="1">
-      <div class="item-image">이미지 영역1</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem1">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목1</div>
-      <div class="item-description">설명1</div>
-    </div>
-    <div class="flex-item item" data-id="2">
-      <div class="item-image">이미지 영역2</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem2">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목2</div>
-      <div class="item-description">설명2</div>
-    </div>
-    <div class="flex-item item" data-id="3">
-      <div class="item-image">이미지 영역3</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem3">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목3</div>
-      <div class="item-description">설명3</div>
-    </div>
-    <div class="flex-item item" data-id="4">
-      <div class="item-image">이미지 영역4</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem4">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목4</div>
-      <div class="item-description">설명4</div>
-    </div>
-    <div class="flex-item item" data-id="5">
-      <div class="item-image">이미지 영역5</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem5">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목5</div>
-      <div class="item-description">설명5</div>
-    </div>
-    <div class="flex-item item" data-id="6">
-      <div class="item-image">이미지 영역6</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem6">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목6</div>
-      <div class="item-description">설명6</div>
-    </div>
-    <div class="flex-item item" data-id="7">
-      <div class="item-image">이미지 영역7</div>
-      <div class="item-check">
-        <input type="checkbox" id="checkItem7">체크(실제로는 안보임)
-      </div>
-      <div class="item-title">제목7</div>
-      <div class="item-description">설명7</div>
-    </div>
-    <div class="flex-item item item-file">
-      <div id="fileDropZone" class="file-drop-zone">파일 업로드 영역</div>
-      <input type="file" id="fileUpload" name="fileUpload" accept="image/*" multiple style="display:none;"/>
-    </div>
-  </div>
+    <hr />
 
-  <hr>
+    <button
+      id="btnCurrentSelectItem"
+      class="button-custom button-custom-middle button-custom-blue"
+    >
+      현재 선택된 아이템은?
+    </button>
 
-  <button id="btnCurrentSelectItem" class="button-custom button-custom-middle button-custom-blue">
-    현재 선택된 아이템은?
-  </button>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=default%2Ces2019"></script>
-  <script src="js/Sortable.js"></script>
-  <script>
-    var $container = $('#container'),
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=default%2Ces2019"></script>
+    <script src="js/Sortable.js"></script>
+    <script>
+      var $container = $('#container'),
         $fileDropZone = $('#fileDropZone'),
         $fileUpload = $('#fileUpload'),
         isDragging = false, // 파일 드래그 & 드랍 업로드 중복 방지용...
         sortObj;
 
-    $(function () {
-      sortObj = Sortable.create($container.get(0), {
-        draggable: '.item',
-        multiDrag: true,
-        multiDragKey: 'ctrl',
-        selectedClass: 'item-select',
-        // animation: 0, // 0으로 설정하면 애니메이션 효과를 끔
-        fallbackTolerance: 4,
-        filter: '.item-check, .item-title, .item-description',
-        preventOnFilter: false,
-        onSelect: function (event) {
-          var i, length;
-          for (i = 0, length = event.items.length; i < length; i += 1) {
-            changeCheckStateItem($(event.items[i]), true);
+      $(function () {
+        sortObj = Sortable.create($container.get(0), {
+          draggable: '.item',
+          multiDrag: true,
+          multiDragKey: 'ctrl',
+          selectedClass: 'item-select',
+          // animation: 0, // 0으로 설정하면 애니메이션 효과를 끔
+          fallbackTolerance: 4,
+          filter: '.item-check, .item-title, .item-description',
+          preventOnFilter: false,
+          onSelect: function (event) {
+            var i, length;
+            for (i = 0, length = event.items.length; i < length; i += 1) {
+              changeCheckStateItem($(event.items[i]), true);
+            }
+          },
+          onDeselect: function (event) {
+            changeCheckStateItem($(event.item), false);
+          },
+          onStart: function (event) {
+            Sortable.utils.select(event.item);
+            isDragging = true;
+          },
+          onMove: function (event, originalEvent) {
+            // TODO: 더 좋은 방법?
+            // 파일 업로드 영역 인 경우 drag가 안되게...
+            if ($(event.dragged).hasClass('item-file')) {
+              return false;
+            }
+          },
+          onEnd: function (event) {
+            var i, length;
+
+            for (i = 0, length = event.items.length; i < length; i += 1) {
+              Sortable.utils.deselect(event.items[i]);
+              changeCheckStateItem($(event.items[i]), false);
+            }
+
+            isDragging = false;
           }
-        },
-        onDeselect: function (event) {
-          changeCheckStateItem($(event.item), false);
-        },
-        onStart: function (event) {
-          Sortable.utils.select(event.item);
-          isDragging = true;
-        },
-        onMove: function (event, originalEvent) {
-          // TODO: 더 좋은 방법?
-          // 파일 업로드 영역 인 경우 drag가 안되게...
-          if ($(event.dragged).hasClass('item-file')) {
-            return false;
+        });
+
+        // 페이지내 파일 드래그 브라우저 표준 동작 방지
+        $('body').on({
+          dragover: function (event) {
+            stopEvent(event);
+          },
+          dragenter: function (event) {
+            stopEvent(event);
+          },
+          drop: function (event) {
+            var targetId = event.target.id;
+
+            event.preventDefault();
+
+            if (targetId !== 'fileDropZone' && !isDragging) {
+              alert('해당 파일을 드래그앤드롭 영역에 올리삼...');
+            }
           }
-        },
-        onEnd: function (event) {
-          var i, length;
+        });
 
-          for (i = 0, length = event.items.length; i < length; i += 1) {
-            Sortable.utils.deselect(event.items[i]);
-            changeCheckStateItem($(event.items[i]), false);
+        // 드래그 파일 업로드
+        $fileDropZone.on({
+          dragover: function (event) {
+            stopEvent(event);
+          },
+          dragenter: function (event) {
+            stopEvent(event);
+          },
+          drop: function (event) {
+            var files = event.originalEvent.dataTransfer.files;
+
+            stopEvent(event);
+
+            files = filterFiles(files);
+            uploadFiles(files);
           }
+        });
 
-          isDragging = false;
-        }
-      });
+        // 선택 파일 창 표시
+        $fileDropZone.click(function () {
+          $fileUpload.trigger('click');
+        });
 
-      // 페이지내 파일 드래그 브라우저 표준 동작 방지
-      $('body').on({
-        'dragover': function (event) {
-          stopEvent(event);
-        },
-        'dragenter': function (event) {
-          stopEvent(event);
-        },
-        'drop': function (event) {
-          var targetId = event.target.id;
-          
-          event.preventDefault();
-
-          if (targetId !== 'fileDropZone' && !isDragging) {
-            alert('해당 파일을 드래그앤드롭 영역에 올리삼...');
-          }
-        }
-      });
-
-      // 드래그 파일 업로드
-      $fileDropZone.on({
-        'dragover': function (event) {
-          stopEvent(event);
-        },
-        'dragenter': function (event) {
-          stopEvent(event);
-        },
-        'drop': function (event) {
-          var files = event.originalEvent.dataTransfer.files;
-
-          stopEvent(event);
-          
+        // 선택 파일 업로드
+        $fileUpload.change(function (event) {
+          var files = event.target.files || [];
           files = filterFiles(files);
           uploadFiles(files);
-        }
-      });
+        });
 
-      // 선택 파일 창 표시
-      $fileDropZone.click(function () {
-        $fileUpload.trigger('click');
-      });
-
-      // 선택 파일 업로드
-      $fileUpload.change(function (event) {
-        var files = event.target.files || [];
-        files = filterFiles(files);
-        uploadFiles(files);
-      });
-
-      $('#btnCurrentSelectItem').click(function () {
-        var $checkList = $container.find('div.item-check input:checkbox:checked'),
+        $('#btnCurrentSelectItem').click(function () {
+          var $checkList = $container.find(
+              'div.item-check input:checkbox:checked'
+            ),
             checkCount = $checkList.length,
             checkIds = [],
             isNewItem = $checkList.closest('div.item').is('div.item-new');
 
-        if (isNewItem) {
-          alert('추가된 아이템은 선택하지 마삼...');
-          return;
-        }
+          if (isNewItem) {
+            alert('추가된 아이템은 선택하지 마삼...');
+            return;
+          }
 
-        if (!checkCount) {
-          alert("선택된 아이템이 없음....");
-          return;
-        }
+          if (!checkCount) {
+            alert('선택된 아이템이 없음....');
+            return;
+          }
 
-        $checkList.each(function (index, item) {
-          checkIds.push($(item).closest('div.item').data('id'));
+          $checkList.each(function (index, item) {
+            checkIds.push($(item).closest('div.item').data('id'));
+          });
+
+          alert(checkIds);
         });
-
-        alert(checkIds);
       });
-    });
 
-    function changeCheckStateItem($item, isChecked) {
-      var $checkBox = $item.find('div.item-check input:checkbox');
+      function changeCheckStateItem($item, isChecked) {
+        var $checkBox = $item.find('div.item-check input:checkbox');
 
-      // TODO: 더 좋은 방법?
-      // setTimeout를 하지 않으면 현재 선택된 아이템의 정보를 가져 올 수 없음
-      setTimeout(function () {
-        $checkBox.prop('checked', isChecked);
-      }, 0);
-    }
+        // TODO: 더 좋은 방법?
+        // setTimeout를 하지 않으면 현재 선택된 아이템의 정보를 가져 올 수 없음
+        setTimeout(function () {
+          $checkBox.prop('checked', isChecked);
+        }, 0);
+      }
 
-    function filterFiles(files) {
-      var result = [],
+      function filterFiles(files) {
+        var result = [],
           length = files.length,
           i;
-          
-      for (i = 0; i < length; i += 1) {
-        file = files[i];
 
-        if (!file.type.match(/^image\/(png|jpeg|gif)$/i)) {
-          console.log('file type miss match: %o', file);
-          continue;
+        for (i = 0; i < length; i += 1) {
+          file = files[i];
+
+          if (!file.type.match(/^image\/(png|jpeg|gif)$/i)) {
+            console.log('file type miss match: %o', file);
+            continue;
+          }
+
+          result.push(file);
         }
 
-        result.push(file);
+        return result;
       }
 
-      return result;
-    }
+      function uploadFiles(files) {
+        var lastFileLength = $('div.item').not('div.item-file').length,
+          file,
+          length,
+          i,
+          html;
 
-    function uploadFiles(files) {
-      var lastFileLength = $('div.item').not('div.item-file').length,
-          file, length, i, html;
+        html = '';
 
-      html = '';
+        for (i = 0, length = files.length; i < length; i += 1) {
+          file = files[i];
+          lastFileLength += 1;
 
-      for (i = 0, length = files.length; i < length; i += 1) {
-        file = files[i];
-        lastFileLength += 1;
+          file.id = lastFileLength;
+          html += template(lastFileLength);
+        }
 
-        file.id = lastFileLength;
-        html += template(lastFileLength);
+        $container.find('div.item-file').before(html);
+
+        // html 생성 후 이미지 미리보기 처리...
+        previewImages(files);
       }
 
-      $container.find('div.item-file').before(html);
-
-      // html 생성 후 이미지 미리보기 처리...
-      previewImages(files);
-    }
-
-    function addNewItem() {
-      $('#container').append('<div class="flex-item item">II</div>');
-    }
-
-    function stopEvent(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    function previewImages(files) {
-      var reader, file, fileId, length, i;
-
-      for (i = 0, length = files.length; i < length; i += 1) {
-        file = files[i];
-        fileId = file.id;
-
-        readImage(fileId, file);
-      }
-    }
-
-    function readImage(id, file) {
-      var reader = new FileReader();
-
-      reader.onload = function (event) {
-        $('div[data-id='+ id +'] img').attr('src', event.target.result);
+      function addNewItem() {
+        $('#container').append('<div class="flex-item item">II</div>');
       }
 
-      reader.readAsDataURL(file);
-    }
+      function stopEvent(event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
 
-    function template(id) {
-      return '<div class="flex-item item" data-id="'+ id +'">'+
-        '<div class="item-image"><img src="" alt="이미지'+ id +'" /></div>'+
-        '<div class="item-check">'+
-          '<input type="checkbox" id="checkItem'+ id +'">체크(실제로는 안보임)'+
-        '</div>'+
-        '<div class="item-title">제목'+ id +'</div>'+
-        '<div class="item-description">설명'+ id +'</div>'+
-      '</div>';
-    }
-  </script>
-</body>
+      function previewImages(files) {
+        var reader, file, fileId, length, i;
 
+        for (i = 0, length = files.length; i < length; i += 1) {
+          file = files[i];
+          fileId = file.id;
+
+          readImage(fileId, file);
+        }
+      }
+
+      function readImage(id, file) {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          $('div[data-id=' + id + '] img').attr('src', event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      function template(id) {
+        return (
+          '<div class="flex-item item" data-id="' +
+          id +
+          '">' +
+          '<div class="item-image"><img src="" alt="이미지' +
+          id +
+          '" /></div>' +
+          '<div class="item-check">' +
+          '<input type="checkbox" id="checkItem' +
+          id +
+          '">체크(실제로는 안보임)' +
+          '</div>' +
+          '<div class="item-title">제목' +
+          id +
+          '</div>' +
+          '<div class="item-description">설명' +
+          id +
+          '</div>' +
+          '</div>'
+        );
+      }
+    </script>
+  </body>
 </html>

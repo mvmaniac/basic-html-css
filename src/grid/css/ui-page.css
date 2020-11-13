@@ -39,7 +39,7 @@
 
 .modal {
   display: none;
-  top: 80px
+  top: 80px;
 }
 
 #modal-switch:checked ~ .modal {
@@ -64,8 +64,8 @@ label[for='modal-switch']:before {
   cursor: pointer;
 }
 
-#modal-switch:checked ~ label[for='modal-switch']:before  {
-  color: dodgerblue
+#modal-switch:checked ~ label[for='modal-switch']:before {
+  color: dodgerblue;
 }
 
 #modal-switch,
@@ -83,7 +83,7 @@ label[for='modal-switch'] span {
   .page {
     display: grid;
     grid-template-columns: 20% 1fr 20%;
-    grid-template-areas: 
+    grid-template-areas:
       'header header header'
       'menu menu menu'
       'secondary-a primary secondary-b'
@@ -155,6 +155,5 @@ label[for='modal-switch'] span {
   .page {
     display: grid;
     grid-template-columns: 300px 1fr 300px;
-    
   }
 }

@@ -1,107 +1,110 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>목차</title>
+    <link rel="stylesheet" href="normalize.css" />
+    <style>
+      @font-face {
+        font-family: 'Noto Sans Korean';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Noto Sans Regular'), local('NotoSans-Regular'),
+          url(fonts/NotoSansKR-Regular-Hestia.eot),
+          url(fonts/NotoSansKR-Regular-Hestia.eot?#iefix)
+            format('embedded-opentype'),
+          url(fonts/NotoSansKR-Regular-Hestia.woff) format('woff'),
+          url(fonts/NotoSansKR-Regular-Hestia.otf) format('opentype');
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>목차</title>
-  <link rel="stylesheet" href="normalize.css">
-  <style>
-    @font-face {
-      font-family: 'Noto Sans Korean';
-      font-style: normal;
-      font-weight: 400;
-      src: local('Noto Sans Regular'), local('NotoSans-Regular'),
-        url(fonts/NotoSansKR-Regular-Hestia.eot),
-        url(fonts/NotoSansKR-Regular-Hestia.eot?#iefix) format('embedded-opentype'),
-        url(fonts/NotoSansKR-Regular-Hestia.woff) format('woff'),
-        url(fonts/NotoSansKR-Regular-Hestia.otf) format('opentype');
-    }
+      body {
+        margin-left: 1rem;
+        font-family: 'Noto Sans Korean';
+      }
 
-    body {
-      margin-left: 1rem;
-      font-family: 'Noto Sans Korean';
-    }
+      a {
+        color: black;
+        text-decoration: none;
+      }
 
-    a {
-      color: black;
-      text-decoration: none;
-    }
+      a:visited {
+        color: black;
+      }
 
-    a:visited {
-      color: black;
-    }
+      a:hover {
+        text-decoration: underline;
+      }
 
-    a:hover {
-      text-decoration: underline;
-    }
+      ul {
+        list-style-type: decimal-leading-zero;
+      }
 
-    ul {
-      list-style-type: decimal-leading-zero;
-    }
+      ul > li {
+        font-weight: bold;
+        line-height: 2rem;
+      }
+    </style>
+  </head>
 
-    ul>li {
-      font-weight: bold;
-      line-height: 2rem;
-    }
-  </style>
-</head>
+  <body>
+    <h2>1. CSS</h2>
+    <ul>
+      <li><a href="css/01.html">Transform</a></li>
+      <li><a href="css/02.html">Transition</a></li>
+      <li><a href="css/03.html">Animation</a></li>
+      <li><a href="css/04.html">Frame by frame animation</a></li>
+      <li><a href="css/05.html">CSS 3D - 1</a></li>
+      <li><a href="css/06.html">CSS 3D - 2</a></li>
+      <li><a href="css/07.html">CSS 3D - 3</a></li>
+    </ul>
 
-<body>
-  <h2>1. CSS</h2>
-  <ul>
-    <li><a href="css/01.html">Transform</a></li>
-    <li><a href="css/02.html">Transition</a></li>
-    <li><a href="css/03.html">Animation</a></li>
-    <li><a href="css/04.html">Frame by frame animation</a></li>
-    <li><a href="css/05.html">CSS 3D - 1</a></li>
-    <li><a href="css/06.html">CSS 3D - 2</a></li>
-    <li><a href="css/07.html">CSS 3D - 3</a></li>
-  </ul>
+    <h2>2. DOM, Event, Object</h2>
+    <ul>
+      <li><a href="./dom,event,object/01.html">DOM 스크립트</a></li>
+      <li><a href="./dom,event,object/02.html">이벤트 기본</a></li>
+      <li><a href="./dom,event,object/03.html">이벤트 위임</a></li>
+      <li><a href="./dom,event,object/04.html">예제 - 3개의 문</a></li>
+      <li><a href="./dom,event,object/05.html">객체</a></li>
+      <li><a href="./dom,event,object/06.html">이벤트 스크롤</a></li>
+      <li><a href="./dom,event,object/07.html">이벤트 Transition</a></li>
+      <li><a href="./dom,event,object/08.html">이벤트 Animation</a></li>
+      <li>
+        <a href="./dom,event,object/09.html">이벤트 requestAnimationFrame</a>
+      </li>
+      <li>
+        <a href="./dom,event,object/10.html">종합예제 - 전진! 3D 스크롤</a>
+      </li>
+    </ul>
 
-  <h2>2. DOM, Event, Object</h2>
-  <ul>
-    <li><a href="./dom,event,object/01.html">DOM 스크립트</a></li>
-    <li><a href="./dom,event,object/02.html">이벤트 기본</a></li>
-    <li><a href="./dom,event,object/03.html">이벤트 위임</a></li>
-    <li><a href="./dom,event,object/04.html">예제 - 3개의 문</a></li>
-    <li><a href="./dom,event,object/05.html">객체</a></li>
-    <li><a href="./dom,event,object/06.html">이벤트 스크롤</a></li>
-    <li><a href="./dom,event,object/07.html">이벤트 Transition</a></li>
-    <li><a href="./dom,event,object/08.html">이벤트 Animation</a></li>
-    <li><a href="./dom,event,object/09.html">이벤트 requestAnimationFrame</a></li>
-    <li><a href="./dom,event,object/10.html">종합예제 - 전진! 3D 스크롤</a></li>
-  </ul>
+    <h2>3. Flex</h2>
+    <ul>
+      <li><a href="./flex/01.html">배치의 흐름</a></li>
+      <li><a href="./flex/02.html">간단한 예제</a></li>
+      <li><a href="./flex/03.html">전체 아이템 정렬</a></li>
+      <li><a href="./flex/04.html">Flex 속성 활용</a></li>
+      <li><a href="./flex/05.html">반응형 컬럼</a></li>
+      <li><a href="./flex/06.html">유용한 기법들 - 1</a></li>
+      <li><a href="./flex/07.html">유용한 기법들 - 2</a></li>
+      <li><a href="./flex/08.html">유용한 기법들 - 3</a></li>
+      <li><a href="./flex/09.html">Flex UI</a></li>
+      <li><a href="./flex/10.html">Flex Sortable</a></li>
+    </ul>
 
-  <h2>3. Flex</h2>
-  <ul>
-    <li><a href="./flex/01.html">배치의 흐름</a></li>
-    <li><a href="./flex/02.html">간단한 예제</a></li>
-    <li><a href="./flex/03.html">전체 아이템 정렬</a></li>
-    <li><a href="./flex/04.html">Flex 속성 활용</a></li>
-    <li><a href="./flex/05.html">반응형 컬럼</a></li>
-    <li><a href="./flex/06.html">유용한 기법들 - 1</a></li>
-    <li><a href="./flex/07.html">유용한 기법들 - 2</a></li>
-    <li><a href="./flex/08.html">유용한 기법들 - 3</a></li>
-    <li><a href="./flex/09.html">Flex UI</a></li>
-    <li><a href="./flex/10.html">Flex Sortable</a></li>
-  </ul>
-
-  <h2>4. Grid</h2>
-  <ul>
-    <li><a href="./grid/01.html">그리드의 기본 형태</a></li>
-    <li><a href="./grid/02.html">자동으로 채우기</a></li>
-    <li><a href="./grid/03.html">셀 간격 만들기</a></li>
-    <li><a href="./grid/04.html">그리드 자동 정의</a></li>
-    <li><a href="./grid/05.html">각 셀의 영역 지정</a></li>
-    <li><a href="./grid/06.html">영역 이름 사용하기</a></li>
-    <li><a href="./grid/07.html">Grid UI</a></li>
-    <li><a href="./grid/08.html">Grid 활용예제 - 1</a></li>
-    <li><a href="./grid/09.html">Grid 활용예제 - 2</a></li>
-    <li><a href="./grid/10.html">Grid 활용예제 - 3</a></li>
-    <li><a href="./grid/11.html">Grid for IE</a></li>
-    <li><a href="./grid/12.html">Grid UI for IE</a></li>
-  </ul>
-</body>
-
+    <h2>4. Grid</h2>
+    <ul>
+      <li><a href="./grid/01.html">그리드의 기본 형태</a></li>
+      <li><a href="./grid/02.html">자동으로 채우기</a></li>
+      <li><a href="./grid/03.html">셀 간격 만들기</a></li>
+      <li><a href="./grid/04.html">그리드 자동 정의</a></li>
+      <li><a href="./grid/05.html">각 셀의 영역 지정</a></li>
+      <li><a href="./grid/06.html">영역 이름 사용하기</a></li>
+      <li><a href="./grid/07.html">Grid UI</a></li>
+      <li><a href="./grid/08.html">Grid 활용예제 - 1</a></li>
+      <li><a href="./grid/09.html">Grid 활용예제 - 2</a></li>
+      <li><a href="./grid/10.html">Grid 활용예제 - 3</a></li>
+      <li><a href="./grid/11.html">Grid for IE</a></li>
+      <li><a href="./grid/12.html">Grid UI for IE</a></li>
+    </ul>
+  </body>
 </html>
