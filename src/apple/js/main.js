@@ -18,11 +18,11 @@
         messageD: document.querySelector('#scroll-section-0 .main-message.d'),
         canvas: document.querySelector('#video-canvas-0'),
         context: document.querySelector('#video-canvas-0').getContext('2d'),
-        videoImages: []
+        images: []
       },
       values: {
-        videoImageCount: 300,
-        videoImageSequence: {min: 0, max: 299},
+        imageCount: 300,
+        imageSequence: {min: 0, max: 299},
         opacityOfCanvas: {min: 1, max: 0, play: {start: 0.9, end: 1}},
 
         // 10% ~ 20% 구간에서 opacity 값이 0에서 1로 변경
@@ -77,11 +77,11 @@
         pinC: document.querySelector('#scroll-section-2 .c .pin'),
         canvas: document.querySelector('#video-canvas-1'),
         context: document.querySelector('#video-canvas-1').getContext('2d'),
-        videoImages: []
+        images: []
       },
       values: {
-        videoImageCount: 960,
-        videoImageSequence: {min: 0, max: 959},
+        imageCount: 960,
+        imageSequence: {min: 0, max: 959},
         opacityInOfCanvas: {min: 0, max: 1, play: {start: 0, end: 0.1}},
         opacityOutOfCanvas: {min: 1, max: 0, play: {start: 0.95, end: 1}},
 
@@ -89,22 +89,16 @@
         opacityInOfMessageB: {min: 0, max: 1, play: {start: 0.6, end: 0.65}},
         opacityInOfMessageC: {min: 0, max: 1, play: {start: 0.87, end: 0.92}},
 
-        // prettier-ignore
         translateYInOfMessageA: {min: 20, max: 0, play: {start: 0.15, end: 0.2}},
-        // prettier-ignore
         translateYInOfMessageB: {min: 30, max: 0, play: {start: 0.6, end: 0.65}},
-        // prettier-ignore
         translateYInOfMessageC: {min: 30, max: 0, play: {start: 0.87, end: 0.92}},
 
         opacityOutOfMessageA: {min: 1, max: 0, play: {start: 0.4, end: 0.45}},
         opacityOutOfMessageB: {min: 1, max: 0, play: {start: 0.68, end: 0.73}},
         opacityOutOfMessageC: {min: 1, max: 0, play: {start: 0.95, end: 1}},
 
-        // prettier-ignore
         translateYOutOfMessageA: {min: 0, max: -20, play: {start: 0.4, end: 0.45}},
-        // prettier-ignore
         translateYOutOfMessageB: {min: 0, max: -20, play: {start: 0.68, end: 0.73}},
-        // prettier-ignore
         translateYOutOfMessageC: {min: 0, max: -20, play: {start: 0.95, end: 1}},
 
         scaleYOfPinB: {min: 0.5, max: 1, play: {start: 0.6, end: 0.65}},
@@ -118,22 +112,29 @@
       scrollHeight: 0,
       objects: {
         container: document.querySelector('#scroll-section-3'),
-        canvasContainer: document.querySelector('.canvas-caption')
+        canvasContainer: document.querySelector('.canvas-caption'),
+        canvas: document.querySelector('.image-blend-canvas'),
+        context: document.querySelector('.image-blend-canvas').getContext('2d'),
+        images: []
       },
-      values: {}
+      values: {
+        imageCount: 2,
+        rect1X: {min: 0, max: 0, play: {start: 0, end: 0}},
+        rect2X: {min: 0, max: 0, play: {start: 0, end: 0}}
+      }
     }
   ];
 
-  function setCanvasImages(sceneInfoObject, imagePath, startImageNumber) {
+  function setCanvasImages(sceneInfoObject, imagePath, imagePrefix, startImageNumber) {
     const {values, objects} = sceneInfoObject;
 
     let imgElem;
 
-    for (let i = 0, length = values.videoImageCount; i < length; i += 1) {
+    for (let i = 0, length = values.imageCount; i < length; i += 1) {
       imgElem = new Image();
-      imgElem.src = `${imagePath}/IMG_${startImageNumber + i}.JPG`;
+      imgElem.src = `${imagePath}/${imagePrefix}${startImageNumber + i}.jpg`;
 
-      objects.videoImages.push(imgElem);
+      objects.images.push(imgElem);
     }
   }
 
@@ -184,10 +185,7 @@
       const partScrollEnd = play.end * scrollHeight;
       const partScrollHeight = partScrollEnd - partScrollStart;
 
-      if (
-        currentYOffset >= partScrollStart &&
-        currentYOffset <= partScrollEnd
-      ) {
+      if (currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
         // prettier-ignore
         return (currentYOffset - partScrollStart) / partScrollHeight * (max - min) + min;
       }
@@ -211,33 +209,19 @@
         let opacity;
         let translateY;
 
-        const sequence = Math.round(
-          calculateValues(values.videoImageSequence, currentYOffset)
-        );
-        objects.context.drawImage(objects.videoImages[sequence], 0, 0);
-        objects.canvas.style.opacity = calculateValues(
-          values.opacityOfCanvas,
-          currentYOffset
-        );
+        const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
+        objects.context.drawImage(objects.images[sequence], 0, 0);
+        objects.canvas.style.opacity = calculateValues(values.opacityOfCanvas, currentYOffset);
 
         // messageA
         if (scrollRatio <= 0.22) {
           // in
           opacity = calculateValues(values.opacityInOfMessageA, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageA,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageA, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageA,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageA,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageA, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageA, currentYOffset);
         }
 
         objects.messageA.style.opacity = opacity;
@@ -247,20 +231,11 @@
         if (scrollRatio <= 0.42) {
           // in
           opacity = calculateValues(values.opacityInOfMessageB, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageB,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageB, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageB,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageB,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageB, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageB, currentYOffset);
         }
 
         objects.messageB.style.opacity = opacity;
@@ -270,20 +245,11 @@
         if (scrollRatio <= 0.62) {
           // in
           opacity = calculateValues(values.opacityInOfMessageC, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageC,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageC, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageC,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageC,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageC, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageC, currentYOffset);
         }
 
         objects.messageC.style.opacity = opacity;
@@ -293,20 +259,11 @@
         if (scrollRatio <= 0.82) {
           // in
           opacity = calculateValues(values.opacityInOfMessageD, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageD,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageD, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageD,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageD,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageD, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageD, currentYOffset);
         }
 
         objects.messageD.style.opacity = opacity;
@@ -320,43 +277,26 @@
         let translateY;
         let scaleY;
 
-        const sequence = Math.round(
-          calculateValues(values.videoImageSequence, currentYOffset)
-        );
-        objects.context.drawImage(objects.videoImages[sequence], 0, 0);
+        const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
+        objects.context.drawImage(objects.images[sequence], 0, 0);
 
         if (scrollRatio <= 0.5) {
           // in
-          objects.canvas.style.opacity = calculateValues(
-            values.opacityInOfCanvas,
-            currentYOffset
-          );
+          objects.canvas.style.opacity = calculateValues(values.opacityInOfCanvas, currentYOffset);
         } else {
           // out
-          objects.canvas.style.opacity = calculateValues(
-            values.opacityOutOfCanvas,
-            currentYOffset
-          );
+          objects.canvas.style.opacity = calculateValues(values.opacityOutOfCanvas, currentYOffset);
         }
 
         // messageA
         if (scrollRatio <= 0.32) {
           // in
           opacity = calculateValues(values.opacityInOfMessageA, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageA,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageA, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageA,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageA,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageA, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageA, currentYOffset);
         }
 
         objects.messageA.style.opacity = opacity;
@@ -366,21 +306,12 @@
         if (scrollRatio <= 0.67) {
           // in
           opacity = calculateValues(values.opacityInOfMessageB, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageB,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageB, currentYOffset);
           scaleY = calculateValues(values.scaleYOfPinB, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageB,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageB,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageB, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageB, currentYOffset);
           scaleY = calculateValues(values.scaleYOfPinB, currentYOffset);
         }
 
@@ -392,21 +323,12 @@
         if (scrollRatio <= 0.93) {
           // in
           opacity = calculateValues(values.opacityInOfMessageC, currentYOffset);
-          translateY = calculateValues(
-            values.translateYInOfMessageC,
-            currentYOffset
-          );
+          translateY = calculateValues(values.translateYInOfMessageC, currentYOffset);
           scaleY = calculateValues(values.scaleYOfPinC, currentYOffset);
         } else {
           // out
-          opacity = calculateValues(
-            values.opacityOutOfMessageC,
-            currentYOffset
-          );
-          translateY = calculateValues(
-            values.translateYOutOfMessageC,
-            currentYOffset
-          );
+          opacity = calculateValues(values.opacityOutOfMessageC, currentYOffset);
+          translateY = calculateValues(values.translateYOutOfMessageC, currentYOffset);
           scaleY = calculateValues(values.scaleYOfPinC, currentYOffset);
         }
 
@@ -418,6 +340,60 @@
       }
 
       case 3: {
+        // 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
+        const widthRatio = window.innerWidth / objects.canvas.width;
+        const heightRatio = window.innerHeight / objects.canvas.height;
+
+        let canvasScaleRatio;
+
+        if (widthRatio <= heightRatio) {
+          // 캔버스 보다 브라우저 창이 홀쭉한 경우
+          canvasScaleRatio = heightRatio;
+        } else {
+          // 캔버스 보다 브라우저 창이 납작한 경우
+          canvasScaleRatio = widthRatio;
+        }
+
+        // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
+        const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
+        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+        objects.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objects.context.drawImage(
+          objects.images[0],
+          0,
+          0,
+          objects.canvas.width,
+          objects.canvas.height
+        );
+
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
+
+        values.rect1X.min = (objects.canvas.width - recalculatedInnerWidth) / 2;
+        values.rect1X.max = values.rect1X.min - whiteRectWidth;
+        values.rect2X.min = values.rect1X.min + recalculatedInnerWidth - whiteRectWidth;
+        values.rect2X.max = values.rect2X.min + whiteRectWidth;
+
+        // 좌우 흰색 박스 그리기 fillRect(x, y, width, height)
+        // prettier-ignore
+        objects.context.fillRect(
+          values.rect1X.min, 0,
+          parseInt(whiteRectWidth, 10), objects.canvas.height
+        );
+        // objects.context.fillRect(
+        //   parseInt(calculateValues(values.rect1X, currentYOffset), 10), 0,
+        //   parseInt(whiteRectWidth, 10), objects.canvas.height
+        // );
+
+        // prettier-ignore
+        objects.context.fillRect(
+          values.rect2X.min, 0,
+          parseInt(whiteRectWidth, 10), objects.canvas.height
+        );
+        // objects.context.fillRect(
+        //   parseInt(calculateValues(values.rect2X, currentYOffset), 10), 0,
+        //   parseInt(whiteRectWidth, 10), objects.canvas.height
+        // );
         break;
       }
 
@@ -466,10 +442,15 @@
     setLayout();
 
     const {objects} = sceneInfo[0];
-    objects.context.drawImage(objects.videoImages[0], 0, 0);
+    objects.context.drawImage(objects.images[0], 0, 0);
   });
 
-  // 비디오 이미지 로드
-  setCanvasImages(sceneInfo[0], '/apple/video/001', 6726);
-  setCanvasImages(sceneInfo[2], '/apple/video/002', 7027);
+  // 캔버스에 사용될 이미지 로드
+  setCanvasImages(sceneInfo[0], '/apple/video/001', 'IMG_', 6726);
+  setCanvasImages(sceneInfo[2], '/apple/video/002', 'IMG_', 7027);
+  setCanvasImages(sceneInfo[3], '/apple/images', 'blend-image-', 1);
+
+  // scene3 의 캔버스는 현재 모니터의 해상도에 맞춰서 보여줌
+  document.querySelector('.image-blend-canvas').setAttribute('width', window.screen.width);
+  document.querySelector('.image-blend-canvas').setAttribute('height', window.screen.height);
 })();

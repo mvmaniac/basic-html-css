@@ -70,7 +70,7 @@ a {
 }
 
 .scroll-section {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   padding-top: 50vh;
 }
 
@@ -197,6 +197,16 @@ a {
 #scroll-section-2 .c {
   top: 15%;
   left: 45%;
+}
+
+.image-blend-canvas {
+  border: 1px solid red;
+}
+
+#scroll-section-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
