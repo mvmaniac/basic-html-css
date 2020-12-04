@@ -120,7 +120,8 @@
       values: {
         imageCount: 2,
         rect1X: {min: 0, max: 0, play: {start: 0, end: 0}},
-        rect2X: {min: 0, max: 0, play: {start: 0, end: 0}}
+        rect2X: {min: 0, max: 0, play: {start: 0, end: 0}},
+        rectStartY: 0
       }
     }
   ];
@@ -336,10 +337,67 @@
         objects.messageC.style.transform = `translate3d(0, ${translateY}%, 0)`;
         objects.pinC.style.transform = `scaleY(${scaleY})`;
 
+        // currentScene 3에서 쓰는 캔버스를 미리 그려주기 시작
+        if (scrollRatio > 0.9) {
+          // eslint-disable-next-line no-shadow
+          const {objects, values} = sceneInfo[3];
+          const widthRatio = window.innerWidth / objects.canvas.width;
+          const heightRatio = window.innerHeight / objects.canvas.height;
+
+          let canvasScaleRatio;
+
+          if (widthRatio <= heightRatio) {
+            // 캔버스 보다 브라우저 창이 홀쭉한 경우
+            canvasScaleRatio = heightRatio;
+          } else {
+            // 캔버스 보다 브라우저 창이 납작한 경우
+            canvasScaleRatio = widthRatio;
+          }
+
+          objects.canvas.style.transform = `scale(${canvasScaleRatio})`;
+
+          objects.context.fillStyle = 'white';
+          objects.context.drawImage(
+            objects.images[0],
+            0,
+            0,
+            objects.canvas.width,
+            objects.canvas.height
+          );
+
+          // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
+          // document.body.offsetWidth 은 스크롤 넓이를 제외한 값
+          const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+          const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+          const whiteRectWidth = recalculatedInnerWidth * 0.15;
+
+          values.rect1X.min = (objects.canvas.width - recalculatedInnerWidth) / 2;
+          values.rect1X.max = values.rect1X.min - whiteRectWidth;
+          values.rect2X.min = values.rect1X.min + recalculatedInnerWidth - whiteRectWidth;
+          values.rect2X.max = values.rect2X.min + whiteRectWidth;
+
+          objects.context.fillRect(
+            values.rect1X.min,
+            0,
+            parseInt(whiteRectWidth, 10),
+            objects.canvas.height
+          );
+
+          objects.context.fillRect(
+            values.rect2X.min,
+            0,
+            parseInt(whiteRectWidth, 10),
+            objects.canvas.height
+          );
+        }
+
         break;
       }
 
       case 3: {
+        let step = 0;
+
         // 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
         const widthRatio = window.innerWidth / objects.canvas.width;
         const heightRatio = window.innerHeight / objects.canvas.height;
@@ -354,11 +412,8 @@
           canvasScaleRatio = widthRatio;
         }
 
-        // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
-        const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
-        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
-
         objects.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objects.context.fillStyle = 'white';
         objects.context.drawImage(
           objects.images[0],
           0,
@@ -366,6 +421,27 @@
           objects.canvas.width,
           objects.canvas.height
         );
+
+        // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
+        // document.body.offsetWidth 은 스크롤 넓이를 제외한 값
+        const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+        if (!values.rectStartY) {
+          // values.rectStartY = objects.canvas.getBoundingClientRect().top;
+
+          // prettier-ignore
+          // 현재 캔버스 높이(objects.canvas.height) 에서 scale 값이 적용 된 캔버스 높이(objects.canvas.height * canvasScaleRatio)를 빼면
+          // scale 적용된 캔버스와의 높이 차이 값을 구할 수 있고 거기서 나누기 2를 해서 위/아래 중 위쪽 영역의 높이 만 가져옴
+          // 나온 높이 값을 현재 문서에서 캔버스가 떨어진 위치값(objects.canvas.offsetTop)에 더해서 현재 캔버스의 정확한 top 값을 가져옴
+          values.rectStartY = objects.canvas.offsetTop + ((objects.canvas.height - objects.canvas.height * canvasScaleRatio) / 2);
+
+          values.rect1X.play.start = window.innerHeight / 2 / scrollHeight;
+          values.rect1X.play.end = values.rectStartY / scrollHeight;
+
+          values.rect2X.play.start = window.innerHeight / 2 / scrollHeight;
+          values.rect2X.play.end = values.rectStartY / scrollHeight;
+        }
 
         const whiteRectWidth = recalculatedInnerWidth * 0.15;
 
@@ -375,25 +451,35 @@
         values.rect2X.max = values.rect2X.min + whiteRectWidth;
 
         // 좌우 흰색 박스 그리기 fillRect(x, y, width, height)
-        // prettier-ignore
         objects.context.fillRect(
-          values.rect1X.min, 0,
-          parseInt(whiteRectWidth, 10), objects.canvas.height
+          parseInt(calculateValues(values.rect1X, currentYOffset), 10),
+          0,
+          parseInt(whiteRectWidth, 10),
+          objects.canvas.height
         );
-        // objects.context.fillRect(
-        //   parseInt(calculateValues(values.rect1X, currentYOffset), 10), 0,
-        //   parseInt(whiteRectWidth, 10), objects.canvas.height
-        // );
 
-        // prettier-ignore
         objects.context.fillRect(
-          values.rect2X.min, 0,
-          parseInt(whiteRectWidth, 10), objects.canvas.height
+          parseInt(calculateValues(values.rect2X, currentYOffset), 10),
+          0,
+          parseInt(whiteRectWidth, 10),
+          objects.canvas.height
         );
-        // objects.context.fillRect(
-        //   parseInt(calculateValues(values.rect2X, currentYOffset), 10), 0,
-        //   parseInt(whiteRectWidth, 10), objects.canvas.height
-        // );
+
+        if (scrollRatio < values.rect1X.play.end) {
+          // 캔버스가 브라우저 상단에 닿지 않았다면
+          step = 1;
+          objects.canvas.classList.remove('sticky');
+        } else {
+          // 캔버스가 브라우저 상단에 닿았다면
+          step = 2;
+          objects.canvas.classList.add('sticky');
+
+          // prettier-ignore
+          objects.canvas.style.top = `${-(objects.canvas.height - objects.canvas.height * canvasScaleRatio) / 2}px`
+
+          // 이미지 블렌드
+        }
+
         break;
       }
 
