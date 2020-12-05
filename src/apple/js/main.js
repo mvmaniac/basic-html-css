@@ -112,19 +112,33 @@
       scrollHeight: 0,
       objects: {
         container: document.querySelector('#scroll-section-3'),
-        canvasContainer: document.querySelector('.canvas-caption'),
+        canvasCaption: document.querySelector('.canvas-caption'),
         canvas: document.querySelector('.image-blend-canvas'),
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
+        tempContext: document.createElement('canvas').getContext('2d'),
         images: []
       },
       values: {
         imageCount: 2,
         rect1X: {min: 0, max: 0, play: {start: 0, end: 0}},
         rect2X: {min: 0, max: 0, play: {start: 0, end: 0}},
+        blendHeight: {min: 0, max: 0, play: {start: 0, end: 0}},
+        scaleOfCanvas: {min: 0, max: 0, play: {start: 0, end: 0}},
+        opacityOfCanvasCaption: {min: 0, max: 1, play: {start: 0, end: 0}},
+        translateYOfCanvasCaption: {min: 20, max: 0, play: {start: 0, end: 0}},
         rectStartY: 0
       }
     }
   ];
+
+  function checkMenu() {
+    // global-nav 높이 값이 44임
+    if (yOffset > 44) {
+      document.body.classList.add('local-nav-sticky');
+    } else {
+      document.body.classList.remove('local-nav-sticky');
+    }
+  }
 
   function setCanvasImages(sceneInfoObject, imagePath, imagePrefix, startImageNumber) {
     const {values, objects} = sceneInfoObject;
@@ -187,8 +201,7 @@
       const partScrollHeight = partScrollEnd - partScrollStart;
 
       if (currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
-        // prettier-ignore
-        return (currentYOffset - partScrollStart) / partScrollHeight * (max - min) + min;
+        return ((currentYOffset - partScrollStart) / partScrollHeight) * (max - min) + min;
       }
 
       // currentYOffset < partScrollStart 인 경우 min
@@ -396,8 +409,6 @@
       }
 
       case 3: {
-        let step = 0;
-
         // 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
         const widthRatio = window.innerWidth / objects.canvas.width;
         const heightRatio = window.innerHeight / objects.canvas.height;
@@ -466,18 +477,80 @@
         );
 
         if (scrollRatio < values.rect1X.play.end) {
-          // 캔버스가 브라우저 상단에 닿지 않았다면
-          step = 1;
+          // 캔버스가 브라우저 상단에 닿기 전
           objects.canvas.classList.remove('sticky');
         } else {
-          // 캔버스가 브라우저 상단에 닿았다면
-          step = 2;
+          // 캔버스가 브라우저 상단에 닿은 후
           objects.canvas.classList.add('sticky');
 
           // prettier-ignore
           objects.canvas.style.top = `${-(objects.canvas.height - objects.canvas.height * canvasScaleRatio) / 2}px`
 
-          // 이미지 블렌드
+          // 이미지 블렌드 처리
+          values.blendHeight.min = 0;
+          values.blendHeight.max = objects.canvas.height;
+          values.blendHeight.play.start = values.rect1X.play.end;
+          values.blendHeight.play.end = values.blendHeight.play.start + 0.2; // start 시점으로 부터 0.2(20%)까지 실행
+
+          const blendHeight = calculateValues(values.blendHeight, currentYOffset);
+
+          // TODO: 최초 1번만 그리기?
+          objects.tempContext.canvas.width = objects.canvas.width;
+          objects.tempContext.canvas.height = objects.canvas.height;
+          objects.tempContext.drawImage(
+            objects.images[1],
+            0,
+            0,
+            objects.canvas.width,
+            objects.canvas.height
+          );
+
+          objects.context.drawImage(
+            objects.tempContext.canvas,
+            0,
+            objects.canvas.height - blendHeight,
+            objects.canvas.width,
+            blendHeight,
+            0,
+            objects.canvas.height - blendHeight,
+            objects.canvas.width,
+            blendHeight
+          );
+
+          if (scrollRatio > values.blendHeight.play.end) {
+            // 블렌드된 이미지 축소
+            values.scaleOfCanvas.min = canvasScaleRatio;
+            values.scaleOfCanvas.max = document.body.offsetWidth / (1.5 * objects.canvas.width); // 분수니깐 분모의 값을 증가시켜서 결과값을 작게 만듬
+
+            values.scaleOfCanvas.play.start = values.blendHeight.play.end;
+            values.scaleOfCanvas.play.end = values.scaleOfCanvas.play.start + 0.2; // start 시점으로 부터 0.2(20%)까지 실행
+
+            const scaleOfCanvas = calculateValues(values.scaleOfCanvas, currentYOffset);
+            objects.canvas.style.transform = `scale(${scaleOfCanvas})`;
+            objects.canvas.style.marginTop = '0';
+          }
+
+          if (scrollRatio > values.scaleOfCanvas.play.end && values.scaleOfCanvas.play.end > 0) {
+            objects.canvas.classList.remove('sticky');
+            objects.canvas.style.marginTop = `${scrollHeight * 0.4}px`; // 0.2로 더해준 부분이 2군데 라서 0.4?
+
+            values.opacityOfCanvasCaption.play.start = values.scaleOfCanvas.play.end;
+            values.opacityOfCanvasCaption.play.end = values.opacityOfCanvasCaption.play.start + 0.1;
+
+            objects.canvasCaption.style.opacity = calculateValues(
+              values.opacityOfCanvasCaption,
+              currentYOffset
+            );
+
+            values.translateYOfCanvasCaption.play.start = values.opacityOfCanvasCaption.play.start;
+            values.translateYOfCanvasCaption.play.end = values.opacityOfCanvasCaption.play.end;
+
+            const translateYOfCanvasCaption = calculateValues(
+              values.translateYOfCanvasCaption,
+              currentYOffset
+            );
+            objects.canvasCaption.style.transform = `translate3d(0, ${translateYOfCanvasCaption}%, 0)`;
+          }
         }
 
         break;
@@ -522,6 +595,7 @@
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset;
     scrollLoop();
+    checkMenu();
   });
   window.addEventListener('resize', setLayout);
   window.addEventListener('load', () => {
