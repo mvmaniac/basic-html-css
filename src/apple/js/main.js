@@ -642,10 +642,17 @@
   });
   window.addEventListener('orientationchange', setLayout);
   window.addEventListener('load', () => {
+    document.body.classList.remove('before-load');
+
     setLayout();
 
     const {objects} = sceneInfo[0];
     objects.context.drawImage(objects.images[0], 0, 0);
+  });
+
+  // 로딩 없애기
+  document.querySelector('.loading').addEventListener('transitionend', (event) => {
+    document.body.removeChild(event.currentTarget);
   });
 
   // 캔버스에 사용될 이미지 로드
