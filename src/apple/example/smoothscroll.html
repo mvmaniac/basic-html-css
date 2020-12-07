@@ -37,6 +37,8 @@
       });
 
       function loop() {
+        // 목표 지점(pageYOffset)에서 현재위치(delayedYOffset)를 빼고 0.1를 곱함
+        // 그러면 0.1 만큼 앞으로 이동하고 다시 현재위치에 더하면 목표지점으로 현재위치가 조금씩 앞으로 이동함
         delayedYOffset = delayedYOffset + (pageYOffset - delayedYOffset) * acc;
         box.style.width = `${delayedYOffset}px`;
         console.log('loop');
