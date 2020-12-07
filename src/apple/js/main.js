@@ -4,6 +4,12 @@
   let currentScene = 0; // 현재 활성화된(눈 앞에 보고있는) 씬(scroll-section)
   let isNewScene = false; // 새로운 scene이 시작된 순간 true
 
+  // 부드러운 스크롤 처리
+  const acc = 0.1;
+  let delayedYOffset = 0;
+  let rafId;
+  let rafState;
+
   const sceneInfo = [
     {
       // scroll-section-0
@@ -223,8 +229,8 @@
         let opacity;
         let translateY;
 
-        const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
-        objects.context.drawImage(objects.images[sequence], 0, 0);
+        // const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
+        // objects.context.drawImage(objects.images[sequence], 0, 0);
         objects.canvas.style.opacity = calculateValues(values.opacityOfCanvas, currentYOffset);
 
         // messageA
@@ -291,8 +297,8 @@
         let translateY;
         let scaleY;
 
-        const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
-        objects.context.drawImage(objects.images[sequence], 0, 0);
+        // const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
+        // objects.context.drawImage(objects.images[sequence], 0, 0);
 
         if (scrollRatio <= 0.5) {
           // in
@@ -570,14 +576,14 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
-    if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+    if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       isNewScene = true;
 
       currentScene += 1;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
-    if (yOffset < prevScrollHeight) {
+    if (delayedYOffset < prevScrollHeight) {
       isNewScene = true;
 
       if (currentScene === 0) return; // 브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
@@ -592,12 +598,49 @@
     playAnimation();
   }
 
+  function loop() {
+    delayedYOffset += (yOffset - delayedYOffset) * acc;
+
+    // 새로운 씬으로 들어갈 때가 아니고
+    // 0번째 씬이거나 2번째 씬인 경우
+    if (!isNewScene && (currentScene === 0 || currentScene === 2)) {
+      const currentYOffset = delayedYOffset - prevScrollHeight;
+      const {objects, values} = sceneInfo[currentScene];
+
+      const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
+
+      if (objects.images[sequence]) {
+        objects.context.drawImage(objects.images[sequence], 0, 0);
+      }
+    }
+
+    rafId = requestAnimationFrame(loop);
+
+    if (Math.abs(yOffset - delayedYOffset) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
+  }
+
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset;
     scrollLoop();
     checkMenu();
+
+    if (!rafState) {
+      rafId = requestAnimationFrame(loop);
+      rafState = true;
+    }
   });
-  window.addEventListener('resize', setLayout);
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 600) {
+      setLayout();
+    }
+
+    // 초기화 처리
+    sceneInfo[3].values.rectStartY = 0;
+  });
+  window.addEventListener('orientationchange', setLayout);
   window.addEventListener('load', () => {
     setLayout();
 
@@ -610,7 +653,7 @@
   setCanvasImages(sceneInfo[2], '/apple/video/002', 'IMG_', 7027);
   setCanvasImages(sceneInfo[3], '/apple/images', 'blend-image-', 1);
 
-  // scene3 의 캔버스는 현재 모니터의 해상도에 맞춰서 보여줌
+  // scene3의 캔버스는 현재 모니터의 해상도에 맞춰서 보여줌
   document.querySelector('.image-blend-canvas').setAttribute('width', window.screen.width);
   document.querySelector('.image-blend-canvas').setAttribute('height', window.screen.height);
 })();
