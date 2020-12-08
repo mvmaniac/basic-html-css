@@ -66,7 +66,8 @@
       // heightNum: 5, // type normal 에서는 필요 없음
       scrollHeight: 0,
       objects: {
-        container: document.querySelector('#scroll-section-1')
+        container: document.querySelector('#scroll-section-1'),
+        content: document.querySelector('#scroll-section-1 .description')
       }
     },
     {
@@ -122,7 +123,8 @@
         canvas: document.querySelector('.image-blend-canvas'),
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
         tempContext: document.createElement('canvas').getContext('2d'),
-        images: []
+        images: [],
+        messageA: document.querySelector('#scroll-section-3 .main-message.a')
       },
       values: {
         imageCount: 2,
@@ -132,7 +134,9 @@
         scaleOfCanvas: {min: 0, max: 0, play: {start: 0, end: 0}},
         opacityOfCanvasCaption: {min: 0, max: 1, play: {start: 0, end: 0}},
         translateYOfCanvasCaption: {min: 20, max: 0, play: {start: 0, end: 0}},
-        rectStartY: 0
+        rectStartY: 0,
+        opacityInOfMessageA: {min: 0, max: 1, play: {start: 0, end: 0}},
+        opacityOutOfMessageA: {min: 1, max: 0, play: {start: 0, end: 0}}
       }
     }
   ];
@@ -165,7 +169,8 @@
       if (sceneInfo[i].type === 'sticky') {
         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
       } else {
-        sceneInfo[i].scrollHeight = sceneInfo[i].objects.container.offsetHeight; // 컨테이너 원래 높이로 적용
+        sceneInfo[i].scrollHeight =
+          sceneInfo[i].objects.content.offsetHeight + window.innerHeight * 0.5; // 컨테이너 원래 높이로 적용
       }
 
       // prettier-ignore
@@ -556,7 +561,33 @@
               currentYOffset
             );
             objects.canvasCaption.style.transform = `translate3d(0, ${translateYOfCanvasCaption}%, 0)`;
+          } else {
+            objects.canvasCaption.style.opacity = values.opacityOfCanvasCaption.min;
           }
+
+          values.opacityInOfMessageA.play.start = values.rect1X.play.end;
+          values.opacityInOfMessageA.play.end = values.blendHeight.play.start + 0.1;
+          values.opacityOutOfMessageA.play.start = values.opacityInOfMessageA.play.end + 0.1;
+          values.opacityOutOfMessageA.play.end = values.opacityOutOfMessageA.play.start + 0.1;
+
+          if (scrollRatio < values.opacityOutOfMessageA.play.end + 0.05) {
+            objects.messageA.style.opacity = calculateValues(
+              values.opacityInOfMessageA,
+              currentYOffset
+            );
+          } else {
+            objects.messageA.style.opacity = calculateValues(
+              values.opacityOutOfMessageA,
+              currentYOffset
+            );
+          }
+        }
+
+        if (scrollRatio <= values.opacityInOfMessageA.play.start) {
+          objects.messageA.style.opacity = values.opacityInOfMessageA.min;
+        }
+        if (scrollRatio >= values.opacityOutOfMessageA.play.end) {
+          objects.messageA.style.opacity = values.opacityOutOfMessageA.max;
         }
 
         break;
@@ -576,10 +607,21 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
+    if (delayedYOffset < prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+      document.body.classList.remove('scroll-effect-end');
+    }
+
     if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       isNewScene = true;
 
-      currentScene += 1;
+      if (currentScene === sceneInfo.length - 1) {
+        document.body.classList.add('scroll-effect-end');
+      }
+
+      if (currentScene < sceneInfo.length - 1) {
+        currentScene += 1;
+      }
+
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
@@ -622,25 +664,6 @@
     }
   }
 
-  window.addEventListener('scroll', () => {
-    yOffset = window.pageYOffset;
-    scrollLoop();
-    checkMenu();
-
-    if (!rafState) {
-      rafId = requestAnimationFrame(loop);
-      rafState = true;
-    }
-  });
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 600) {
-      setLayout();
-    }
-
-    // 초기화 처리
-    sceneInfo[3].values.rectStartY = 0;
-  });
-  window.addEventListener('orientationchange', setLayout);
   window.addEventListener('load', () => {
     document.body.classList.remove('before-load');
 
@@ -648,11 +671,52 @@
 
     const {objects} = sceneInfo[0];
     objects.context.drawImage(objects.images[0], 0, 0);
-  });
 
-  // 로딩 없애기
-  document.querySelector('.loading').addEventListener('transitionend', (event) => {
-    document.body.removeChild(event.currentTarget);
+    let tempYOffset = yOffset;
+
+    if (tempYOffset > 0) {
+      let tempScrollCount = 0;
+
+      const siId = setInterval(() => {
+        window.scrollTo(0, tempYOffset);
+        tempYOffset += 5; // 5px씩 이동
+
+        if (tempScrollCount > 20) {
+          clearInterval(siId);
+        }
+
+        tempScrollCount += 1;
+      }, 20);
+    }
+
+    window.addEventListener('scroll', () => {
+      yOffset = window.pageYOffset;
+      scrollLoop();
+      checkMenu();
+
+      if (!rafState) {
+        rafId = requestAnimationFrame(loop);
+        rafState = true;
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        window.location.reload();
+      }
+    });
+
+    window.addEventListener('orientationchange', () => {
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    });
+
+    // 로딩 없애기
+    document.querySelector('.loading').addEventListener('transitionend', (event) => {
+      document.body.removeChild(event.currentTarget);
+    });
   });
 
   // 캔버스에 사용될 이미지 로드
@@ -661,6 +725,9 @@
   setCanvasImages(sceneInfo[3], '/apple/images', 'blend-image-', 1);
 
   // scene3의 캔버스는 현재 모니터의 해상도에 맞춰서 보여줌
-  document.querySelector('.image-blend-canvas').setAttribute('width', window.screen.width);
-  document.querySelector('.image-blend-canvas').setAttribute('height', window.screen.height);
+  const imageBlendWidth = window.screen.width > 1920 ? window.screen.width : 1920;
+  const imageBlendHeight = window.screen.width > 1080 ? window.screen.height : 1080;
+
+  document.querySelector('.image-blend-canvas').setAttribute('width', imageBlendWidth);
+  document.querySelector('.image-blend-canvas').setAttribute('height', imageBlendHeight);
 })();
