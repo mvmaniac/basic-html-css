@@ -4,7 +4,7 @@
   const barElem = document.querySelector('.progress-bar');
   const selectCharacterElem = document.querySelector('.select-character');
 
-  const mousePos = {x: 0, y: 0};
+  const mousePos = { x: 0, y: 0 };
 
   let maxScrollValue = 0;
 
@@ -12,7 +12,7 @@
     maxScrollValue = document.body.offsetHeight - window.innerHeight;
   }
 
-  window.addEventListener('scroll', function scrollHandler() {
+  window.addEventListener('scroll', () => {
     const scrollPer = window.pageYOffset / maxScrollValue;
     const zMove = scrollPer * 980 - 490; // house 초기값이 -490 라서...
     houseElem.style.transform = `translate3d(0, 0, ${zMove}vw)`;
@@ -21,7 +21,7 @@
     barElem.style.width = `${scrollPer * 100}%`;
   });
 
-  window.addEventListener('mousemove', function mousemoveHandler(event) {
+  window.addEventListener('mousemove', (event) => {
     mousePos.x = -1 + (event.clientX / window.innerWidth) * 2;
     mousePos.y = 1 - (event.clientY / window.innerHeight) * 2;
 
@@ -33,7 +33,7 @@
 
   window.addEventListener('resize', resizeHandler);
 
-  stageElem.addEventListener('click', function clickHandler(event) {
+  stageElem.addEventListener('click', (event) => {
     // eslint-disable-next-line no-new, no-undef
     new Character({
       xPos: (event.clientX / window.innerWidth) * 100,
@@ -41,7 +41,7 @@
     });
   });
 
-  selectCharacterElem.addEventListener('click', function clickHandler(event) {
+  selectCharacterElem.addEventListener('click', (event) => {
     const value = event.target.getAttribute('data-char');
     document.body.setAttribute('data-char', value);
   });

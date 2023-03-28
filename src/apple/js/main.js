@@ -28,26 +28,26 @@
       },
       values: {
         imageCount: 300,
-        imageSequence: {min: 0, max: 299},
-        opacityOfCanvas: {min: 1, max: 0, play: {start: 0.9, end: 1}},
+        imageSequence: { min: 0, max: 299 },
+        opacityOfCanvas: { min: 1, max: 0, play: { start: 0.9, end: 1 } },
 
         // 10% ~ 20% 구간에서 opacity 값이 0에서 1로 변경
-        opacityInOfMessageA: {min: 0, max: 1, play: {start: 0.1, end: 0.2}},
-        opacityInOfMessageB: {min: 0, max: 1, play: {start: 0.3, end: 0.4}},
-        opacityInOfMessageC: {min: 0, max: 1, play: {start: 0.5, end: 0.6}},
-        opacityInOfMessageD: {min: 0, max: 1, play: {start: 0.7, end: 0.8}},
+        opacityInOfMessageA: { min: 0, max: 1, play: { start: 0.1, end: 0.2 } },
+        opacityInOfMessageB: { min: 0, max: 1, play: { start: 0.3, end: 0.4 } },
+        opacityInOfMessageC: { min: 0, max: 1, play: { start: 0.5, end: 0.6 } },
+        opacityInOfMessageD: { min: 0, max: 1, play: { start: 0.7, end: 0.8 } },
 
         // 10% ~ 20% 구간에서 translateY 값이 20에서 0으로 변경 (20으로 내렸다가 0으로 올림)
-        translateYInOfMessageA: {min: 20, max: 0, play: {start: 0.1, end: 0.2}},
-        translateYInOfMessageB: {min: 20, max: 0, play: {start: 0.3, end: 0.4}},
-        translateYInOfMessageC: {min: 20, max: 0, play: {start: 0.5, end: 0.6}},
-        translateYInOfMessageD: {min: 20, max: 0, play: {start: 0.7, end: 0.8}},
+        translateYInOfMessageA: { min: 20, max: 0, play: { start: 0.1, end: 0.2 } },
+        translateYInOfMessageB: { min: 20, max: 0, play: { start: 0.3, end: 0.4 } },
+        translateYInOfMessageC: { min: 20, max: 0, play: { start: 0.5, end: 0.6 } },
+        translateYInOfMessageD: { min: 20, max: 0, play: { start: 0.7, end: 0.8 } },
 
         // 25% ~ 30% 구간에서 opacity 값이 0에서 1로 변경
-        opacityOutOfMessageA: {min: 1, max: 0, play: {start: 0.25, end: 0.3}},
-        opacityOutOfMessageB: {min: 1, max: 0, play: {start: 0.45, end: 0.5}},
-        opacityOutOfMessageC: {min: 1, max: 0, play: {start: 0.65, end: 0.7}},
-        opacityOutOfMessageD: {min: 1, max: 0, play: {start: 0.85, end: 0.9}},
+        opacityOutOfMessageA: { min: 1, max: 0, play: { start: 0.25, end: 0.3 } },
+        opacityOutOfMessageB: { min: 1, max: 0, play: { start: 0.45, end: 0.5 } },
+        opacityOutOfMessageC: { min: 1, max: 0, play: { start: 0.65, end: 0.7 } },
+        opacityOutOfMessageD: { min: 1, max: 0, play: { start: 0.85, end: 0.9 } },
 
         // 25% ~ 30% 구간에서 translateY 값이 0에서 -20으로 변경 (현재 기준으로 음수값으로 하여 위로 올림)
         // prettier-ignore
@@ -88,28 +88,28 @@
       },
       values: {
         imageCount: 960,
-        imageSequence: {min: 0, max: 959},
-        opacityInOfCanvas: {min: 0, max: 1, play: {start: 0, end: 0.1}},
-        opacityOutOfCanvas: {min: 1, max: 0, play: {start: 0.95, end: 1}},
+        imageSequence: { min: 0, max: 959 },
+        opacityInOfCanvas: { min: 0, max: 1, play: { start: 0, end: 0.1 } },
+        opacityOutOfCanvas: { min: 1, max: 0, play: { start: 0.95, end: 1 } },
 
-        opacityInOfMessageA: {min: 0, max: 1, play: {start: 0.25, end: 0.3}},
-        opacityInOfMessageB: {min: 0, max: 1, play: {start: 0.6, end: 0.65}},
-        opacityInOfMessageC: {min: 0, max: 1, play: {start: 0.87, end: 0.92}},
+        opacityInOfMessageA: { min: 0, max: 1, play: { start: 0.25, end: 0.3 } },
+        opacityInOfMessageB: { min: 0, max: 1, play: { start: 0.6, end: 0.65 } },
+        opacityInOfMessageC: { min: 0, max: 1, play: { start: 0.87, end: 0.92 } },
 
-        translateYInOfMessageA: {min: 20, max: 0, play: {start: 0.15, end: 0.2}},
-        translateYInOfMessageB: {min: 30, max: 0, play: {start: 0.6, end: 0.65}},
-        translateYInOfMessageC: {min: 30, max: 0, play: {start: 0.87, end: 0.92}},
+        translateYInOfMessageA: { min: 20, max: 0, play: { start: 0.15, end: 0.2 } },
+        translateYInOfMessageB: { min: 30, max: 0, play: { start: 0.6, end: 0.65 } },
+        translateYInOfMessageC: { min: 30, max: 0, play: { start: 0.87, end: 0.92 } },
 
-        opacityOutOfMessageA: {min: 1, max: 0, play: {start: 0.4, end: 0.45}},
-        opacityOutOfMessageB: {min: 1, max: 0, play: {start: 0.68, end: 0.73}},
-        opacityOutOfMessageC: {min: 1, max: 0, play: {start: 0.95, end: 1}},
+        opacityOutOfMessageA: { min: 1, max: 0, play: { start: 0.4, end: 0.45 } },
+        opacityOutOfMessageB: { min: 1, max: 0, play: { start: 0.68, end: 0.73 } },
+        opacityOutOfMessageC: { min: 1, max: 0, play: { start: 0.95, end: 1 } },
 
-        translateYOutOfMessageA: {min: 0, max: -20, play: {start: 0.4, end: 0.45}},
-        translateYOutOfMessageB: {min: 0, max: -20, play: {start: 0.68, end: 0.73}},
-        translateYOutOfMessageC: {min: 0, max: -20, play: {start: 0.95, end: 1}},
+        translateYOutOfMessageA: { min: 0, max: -20, play: { start: 0.4, end: 0.45 } },
+        translateYOutOfMessageB: { min: 0, max: -20, play: { start: 0.68, end: 0.73 } },
+        translateYOutOfMessageC: { min: 0, max: -20, play: { start: 0.95, end: 1 } },
 
-        scaleYOfPinB: {min: 0.5, max: 1, play: {start: 0.6, end: 0.65}},
-        scaleYOfPinC: {min: 0.5, max: 1, play: {start: 0.87, end: 0.92}}
+        scaleYOfPinB: { min: 0.5, max: 1, play: { start: 0.6, end: 0.65 } },
+        scaleYOfPinC: { min: 0.5, max: 1, play: { start: 0.87, end: 0.92 } }
       }
     },
     {
@@ -128,15 +128,15 @@
       },
       values: {
         imageCount: 2,
-        rect1X: {min: 0, max: 0, play: {start: 0, end: 0}},
-        rect2X: {min: 0, max: 0, play: {start: 0, end: 0}},
-        blendHeight: {min: 0, max: 0, play: {start: 0, end: 0}},
-        scaleOfCanvas: {min: 0, max: 0, play: {start: 0, end: 0}},
-        opacityOfCanvasCaption: {min: 0, max: 1, play: {start: 0, end: 0}},
-        translateYOfCanvasCaption: {min: 20, max: 0, play: {start: 0, end: 0}},
+        rect1X: { min: 0, max: 0, play: { start: 0, end: 0 } },
+        rect2X: { min: 0, max: 0, play: { start: 0, end: 0 } },
+        blendHeight: { min: 0, max: 0, play: { start: 0, end: 0 } },
+        scaleOfCanvas: { min: 0, max: 0, play: { start: 0, end: 0 } },
+        opacityOfCanvasCaption: { min: 0, max: 1, play: { start: 0, end: 0 } },
+        translateYOfCanvasCaption: { min: 20, max: 0, play: { start: 0, end: 0 } },
         rectStartY: 0,
-        opacityInOfMessageA: {min: 0, max: 1, play: {start: 0, end: 0}},
-        opacityOutOfMessageA: {min: 1, max: 0, play: {start: 0, end: 0}}
+        opacityInOfMessageA: { min: 0, max: 1, play: { start: 0, end: 0 } },
+        opacityOutOfMessageA: { min: 1, max: 0, play: { start: 0, end: 0 } }
       }
     }
   ];
@@ -151,7 +151,7 @@
   }
 
   function setCanvasImages(sceneInfoObject, imagePath, imagePrefix, startImageNumber) {
-    const {values, objects} = sceneInfoObject;
+    const { values, objects } = sceneInfoObject;
 
     let imgElem;
 
@@ -165,7 +165,7 @@
 
   function setLayout() {
     // 각 스크롤 세션의 높이 세팅
-    for (let i = 0, {length} = sceneInfo; i < length; i += 1) {
+    for (let i = 0, { length } = sceneInfo; i < length; i += 1) {
       if (sceneInfo[i].type === 'sticky') {
         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
       } else {
@@ -180,7 +180,7 @@
     yOffset = window.pageYOffset;
 
     let totalScrollHeight = 0;
-    for (let i = 0, {length} = sceneInfo; i < length; i += 1) {
+    for (let i = 0, { length } = sceneInfo; i < length; i += 1) {
       totalScrollHeight += sceneInfo[i].heightNum * window.innerHeight;
 
       if (totalScrollHeight >= yOffset) {
@@ -199,10 +199,10 @@
 
   function calculateValues(values, currentYOffset) {
     // 현재 씬(스크롤 섹션)에서 스크롤 된 범위를 비율로 구하기
-    const {scrollHeight} = sceneInfo[currentScene];
+    const { scrollHeight } = sceneInfo[currentScene];
     const scrollRatio = currentYOffset / scrollHeight;
 
-    const {min, max, play} = values;
+    const { min, max, play } = values;
 
     // 애니메이션 실행 범위 값이 있다면
     if (play) {
@@ -225,7 +225,7 @@
   }
 
   function playAnimation() {
-    const {objects, values, scrollHeight} = sceneInfo[currentScene];
+    const { objects, values, scrollHeight } = sceneInfo[currentScene];
     const currentYOffset = yOffset - prevScrollHeight;
     const scrollRatio = currentYOffset / scrollHeight; // 현재 씬에서의 스크롤된 높이
 
@@ -364,7 +364,7 @@
         // currentScene 3에서 쓰는 캔버스를 미리 그려주기 시작
         if (scrollRatio > 0.9) {
           // eslint-disable-next-line no-shadow
-          const {objects, values} = sceneInfo[3];
+          const { objects, values } = sceneInfo[3];
           const widthRatio = window.innerWidth / objects.canvas.width;
           const heightRatio = window.innerHeight / objects.canvas.height;
 
@@ -647,7 +647,7 @@
     // 0번째 씬이거나 2번째 씬인 경우
     if (!isNewScene && (currentScene === 0 || currentScene === 2)) {
       const currentYOffset = delayedYOffset - prevScrollHeight;
-      const {objects, values} = sceneInfo[currentScene];
+      const { objects, values } = sceneInfo[currentScene];
 
       const sequence = Math.round(calculateValues(values.imageSequence, currentYOffset));
 
@@ -669,7 +669,7 @@
 
     setLayout();
 
-    const {objects} = sceneInfo[0];
+    const { objects } = sceneInfo[0];
     objects.context.drawImage(objects.images[0], 0, 0);
 
     let tempYOffset = yOffset;

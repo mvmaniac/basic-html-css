@@ -59,7 +59,7 @@ Character.prototype = {
         self.mainElem.classList.add('running');
       }
 
-      self.scrollState = setTimeout(function timeoutHandler() {
+      self.scrollState = setTimeout(() => {
         self.scrollState = false;
         self.mainElem.classList.remove('running');
       }, 500);
@@ -76,7 +76,7 @@ Character.prototype = {
       self.lastScrollTop = window.pageYOffset;
     });
 
-    window.addEventListener('keydown', function keydownHandler(event) {
+    window.addEventListener('keydown', (event) => {
       if (event.keyCode === 38 || event.keyCode === 40) {
         event.preventDefault();
       }
@@ -107,7 +107,7 @@ Character.prototype = {
       }
     });
 
-    window.addEventListener('keyup', function keyupHandler() {
+    window.addEventListener('keyup', () => {
       self.mainElem.classList.remove('running');
       cancelAnimationFrame(self.rafId);
       self.runningState = false;
