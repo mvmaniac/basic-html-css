@@ -10,11 +10,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.23.0",
+    "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
     "lite-server": "^2.6.1",
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.7"
   }
 }
