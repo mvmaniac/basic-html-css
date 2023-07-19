@@ -17,10 +17,10 @@
 
 ### 4. Setting
 
-- lite-server
+- serve
 
   ```javascript
-  npm i -D lite-server
+  npm i -D serve
   ```
 
 - eslint & prettier
