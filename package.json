@@ -4,17 +4,17 @@
   "description": "",
   "main": "./src/index.html",
   "scripts": {
-    "start": "lite-server --baseDir=./src"
+    "start": "serve src/"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.36.0",
+    "eslint": "^8.45.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
-    "lite-server": "^2.6.1",
-    "prettier": "^2.8.7"
+    "prettier": "^3.0.0",
+    "serve": "^14.2.0"
   }
 }
