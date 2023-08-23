@@ -16,27 +16,27 @@
         messageB: document.querySelector('#scroll-section-0 .main-message.b'),
         pencilLogo: document.querySelector('#scroll-section-0 .pencil-logo'),
         pencil: document.querySelector('#scroll-section-0 .pencil'),
-        ribbonPath: document.querySelector('.ribbon-path path')
+        ribbonPath: document.querySelector('.ribbon-path path'),
       },
       values: {
-        messageA_opacity_in: [0, 1, {start: 0.1, end: 0.2}],
-        messageB_opacity_in: [0, 1, {start: 0.4, end: 0.5}],
-        messageA_translateY_in: [20, 0, {start: 0.1, end: 0.2}],
-        messageA_opacity_out: [1, 0, {start: 0.3, end: 0.4}],
-        messageB_opacity_out: [1, 0, {start: 0.6, end: 0.7}],
-        messageA_translateY_out: [0, -20, {start: 0.3, end: 0.4}],
-        pencilLogo_width_in: [1000, 200, {start: 0.1, end: 0.4}],
-        pencilLogo_width_out: [200, 50, {start: 0.4, end: 0.8}],
-        pencilLogo_translateX_in: [-10, -20, {start: 0.2, end: 0.4}],
-        pencilLogo_translateX_out: [-20, -50, {start: 0.4, end: 0.8}],
-        pencilLogo_opacity_out: [1, 0, {start: 0.8, end: 0.9}],
-        pencil_right: [-10, 70, {start: 0.3, end: 0.8}],
-        pencil_bottom: [-80, 100, {start: 0.3, end: 0.8}],
-        pencil_rotate: [-120, -200, {start: 0.3, end: 0.8}],
-        path_dashoffset_in: [1401, 0, {start: 0.2, end: 0.4}],
-        path_dashoffset_out: [0, -1401, {start: 0.6, end: 0.8}]
-      }
-    }
+        messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
+        messageB_opacity_in: [0, 1, { start: 0.4, end: 0.5 }],
+        messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2 }],
+        messageA_opacity_out: [1, 0, { start: 0.3, end: 0.4 }],
+        messageB_opacity_out: [1, 0, { start: 0.6, end: 0.7 }],
+        messageA_translateY_out: [0, -20, { start: 0.3, end: 0.4 }],
+        pencilLogo_width_in: [1000, 200, { start: 0.1, end: 0.4 }],
+        pencilLogo_width_out: [200, 50, { start: 0.4, end: 0.8 }],
+        pencilLogo_translateX_in: [-10, -20, { start: 0.2, end: 0.4 }],
+        pencilLogo_translateX_out: [-20, -50, { start: 0.4, end: 0.8 }],
+        pencilLogo_opacity_out: [1, 0, { start: 0.8, end: 0.9 }],
+        pencil_right: [-10, 70, { start: 0.3, end: 0.8 }],
+        pencil_bottom: [-80, 100, { start: 0.3, end: 0.8 }],
+        pencil_rotate: [-120, -200, { start: 0.3, end: 0.8 }],
+        path_dashoffset_in: [1401, 0, { start: 0.2, end: 0.4 }],
+        path_dashoffset_out: [0, -1401, { start: 0.6, end: 0.8 }],
+      },
+    },
   ];
 
   function setLayout() {
@@ -75,7 +75,7 @@
   function calcValues(values, currentYOffset) {
     let rv;
     // 현재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
-    const {scrollHeight} = sceneInfo[currentScene];
+    const { scrollHeight } = sceneInfo[currentScene];
     const scrollRatio = currentYOffset / scrollHeight;
 
     if (values.length === 3) {
@@ -103,10 +103,10 @@
   }
 
   function playAnimation() {
-    const {objs} = sceneInfo[currentScene];
-    const {values} = sceneInfo[currentScene];
+    const { objs } = sceneInfo[currentScene];
+    const { values } = sceneInfo[currentScene];
     const currentYOffset = yOffset - prevScrollHeight;
-    const {scrollHeight} = sceneInfo[currentScene];
+    const { scrollHeight } = sceneInfo[currentScene];
     const scrollRatio = currentYOffset / scrollHeight;
 
     switch (currentScene) {
@@ -116,14 +116,14 @@
           objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
           objs.messageA.style.transform = `translate3d(0, ${calcValues(
             values.messageA_translateY_in,
-            currentYOffset
+            currentYOffset,
           )}%, 0)`;
         } else {
           // out
           objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
           objs.messageA.style.transform = `translate3d(0, ${calcValues(
             values.messageA_translateY_out,
-            currentYOffset
+            currentYOffset,
           )}%, 0)`;
         }
 
@@ -139,20 +139,20 @@
         if (scrollRatio <= 0.4) {
           objs.pencilLogo.style.width = `${calcValues(
             values.pencilLogo_width_in,
-            currentYOffset
+            currentYOffset,
           )}vw`;
           objs.pencilLogo.style.transform = `translate(${calcValues(
             values.pencilLogo_translateX_in,
-            currentYOffset
+            currentYOffset,
           )}%, -50%)`;
         } else {
           objs.pencilLogo.style.width = `${calcValues(
             values.pencilLogo_width_out,
-            currentYOffset
+            currentYOffset,
           )}vw`;
           objs.pencilLogo.style.transform = `translate(${calcValues(
             values.pencilLogo_translateX_out,
-            currentYOffset
+            currentYOffset,
           )}%, -50%)`;
         }
 
@@ -160,12 +160,12 @@
         if (scrollRatio <= 0.5) {
           objs.ribbonPath.style.strokeDashoffset = calcValues(
             values.path_dashoffset_in,
-            currentYOffset
+            currentYOffset,
           );
         } else {
           objs.ribbonPath.style.strokeDashoffset = calcValues(
             values.path_dashoffset_out,
-            currentYOffset
+            currentYOffset,
           );
         }
 
@@ -174,7 +174,7 @@
         objs.pencil.style.bottom = `${calcValues(values.pencil_bottom, currentYOffset)}%`;
         objs.pencil.style.transform = `rotate(${calcValues(
           values.pencil_rotate,
-          currentYOffset
+          currentYOffset,
         )}deg)`;
 
         break;

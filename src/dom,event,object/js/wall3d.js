@@ -37,7 +37,7 @@
     // eslint-disable-next-line no-new, no-undef
     new Character({
       xPos: (event.clientX / window.innerWidth) * 100,
-      speed: Math.random() * 0.4 + 0.1 // 최소 0.1
+      speed: Math.random() * 0.4 + 0.1, // 최소 0.1
     });
   });
 

@@ -1,44 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이벤트 requestAnimationFrame</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <style>
-      .btn {
-        font-size: 2rem;
-      }
-    </style>
-  </head>
-  <body>
-    <button class="btn">취소</button>
-    <script>
-      const btn = document.querySelector('.btn');
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이벤트 requestAnimationFrame</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <style>
+    .btn {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+<button class="btn">취소</button>
+<script>
+  const btn = document.querySelector('.btn');
 
-      let number = 0;
-      let timeId;
+  let number = 0;
+  let timeId;
 
-      function sample() {
-        number += 1;
+  function sample() {
+    number += 1;
 
-        console.log(number);
+    console.log(number);
 
-        if (number > 200) {
-          return;
-        }
+    if (number > 200) {
+      return;
+    }
 
-        timeId = requestAnimationFrame(sample); // 기본이 초당 60번 반복이 목표
-      }
+    timeId = requestAnimationFrame(sample); // 기본이 초당 60번 반복이 목표
+  }
 
-      // requestAnimationFrame(sample); // 함수안에 넣지 않고 밖에서 하면 setTimeout 처럼 수행
-      sample();
+  // requestAnimationFrame(sample); // 함수안에 넣지 않고 밖에서 하면 setTimeout 처럼 수행
+  sample();
 
-      function clickHandler() {
-        cancelAnimationFrame(timeId);
-      }
+  function clickHandler() {
+    cancelAnimationFrame(timeId);
+  }
 
-      btn.addEventListener('click', clickHandler);
-    </script>
-  </body>
+  btn.addEventListener('click', clickHandler);
+</script>
+</body>
 </html>

@@ -1,57 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>부드러운 스크롤</title>
-    <style>
-      body {
-        height: 500vh;
-      }
-      .box {
-        position: fixed;
-        top: 100px;
-        left: 0;
-        width: 0;
-        height: 100px;
-        background: orange;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box"></div>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>부드러운 스크롤</title>
+  <style>
+    body {
+      height: 500vh;
+    }
 
-    <script>
-      const box = document.querySelector('.box');
-      let acc = 0.1;
-      let delayedYOffset = 0;
-      let rafId;
-      let rafState;
+    .box {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 0;
+      height: 100px;
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+<div class="box"></div>
 
-      window.addEventListener('scroll', () => {
-        // box.style.width = `${window.pageYOffset}px`;
-        if (!rafState) {
-          rafId = requestAnimationFrame(loop);
-          rafState = true;
-        }
-      });
+<script>
+  const box = document.querySelector('.box');
+  let acc = 0.1;
+  let delayedYOffset = 0;
+  let rafId;
+  let rafState;
 
-      function loop() {
-        // 목표 지점(pageYOffset)에서 현재위치(delayedYOffset)를 빼고 0.1를 곱함
-        // 그러면 0.1 만큼 앞으로 이동하고 다시 현재위치에 더하면 목표지점으로 현재위치가 조금씩 앞으로 이동함
-        delayedYOffset = delayedYOffset + (pageYOffset - delayedYOffset) * acc;
-        box.style.width = `${delayedYOffset}px`;
-        console.log('loop');
+  window.addEventListener('scroll', () => {
+    // box.style.width = `${window.pageYOffset}px`;
+    if (!rafState) {
+      rafId = requestAnimationFrame(loop);
+      rafState = true;
+    }
+  });
 
-        rafId = requestAnimationFrame(loop);
+  function loop() {
+    // 목표 지점(pageYOffset)에서 현재위치(delayedYOffset)를 빼고 0.1를 곱함
+    // 그러면 0.1 만큼 앞으로 이동하고 다시 현재위치에 더하면 목표지점으로 현재위치가 조금씩 앞으로 이동함
+    delayedYOffset = delayedYOffset + (pageYOffset - delayedYOffset) * acc;
+    box.style.width = `${delayedYOffset}px`;
+    console.log('loop');
 
-        if (Math.abs(pageYOffset - delayedYOffset) < 1) {
-          cancelAnimationFrame(rafId);
-          rafState = false;
-        }
-      }
+    rafId = requestAnimationFrame(loop);
 
-      loop();
-    </script>
-  </body>
+    if (Math.abs(pageYOffset - delayedYOffset) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
+  }
+
+  loop();
+</script>
+</body>
 </html>

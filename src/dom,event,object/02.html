@@ -1,80 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이벤트 기본</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <style>
-      img {
-        max-width: 100%;
-        height: auto;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이벤트 기본</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
-      .characters {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        background: #fff000;
-      }
+    .characters {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #fff000;
+    }
 
-      .ilbuni {
-        width: 100px;
-        cursor: pointer;
-      }
+    .ilbuni {
+      width: 100px;
+      cursor: pointer;
+    }
 
-      .characters .ilbuni {
-        display: inline-block;
-      }
+    .characters .ilbuni {
+      display: inline-block;
+    }
 
-      .special {
-        border: 10px dashed red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="characters">
-      <div class="ilbuni a">
-        <img src="images/ilbuni_0.png" alt="일분이" />
-      </div>
-      <div class="ilbuni b">
-        <img src="images/ilbuni_1.png" alt="일분이" />
-      </div>
-      <div class="ilbuni c">
-        <img src="images/ilbuni_2.png" alt="일분이" />
-      </div>
-      <div class="ilbuni d">
-        <img src="images/ilbuni_3.png" alt="일분이" />
-      </div>
-    </div>
+    .special {
+      border: 10px dashed red;
+    }
+  </style>
+</head>
+<body>
+<div class="characters">
+  <div class="ilbuni a">
+    <img src="images/ilbuni_0.png" alt="일분이" />
+  </div>
+  <div class="ilbuni b">
+    <img src="images/ilbuni_1.png" alt="일분이" />
+  </div>
+  <div class="ilbuni c">
+    <img src="images/ilbuni_2.png" alt="일분이" />
+  </div>
+  <div class="ilbuni d">
+    <img src="images/ilbuni_3.png" alt="일분이" />
+  </div>
+</div>
 
-    <script>
-      // NOTE: DOMContentLoaded가 load와 다른점은 DOM 로드만 완료 되었을 때 실행 함
-      // load의 경우 다른 리소스가 기다림, 현재 코드 상에는 이벤트만 걸기 때문에 전체 리소스가 필요하지 않음
-      // window.addEventListener('load', function onLoad() {
-      /* window.addEventListener('DOMContentLoaded', function onLoad() {
-      const ilbuniC = document.querySelector('.ilbuni:nth-child(3)');
+<script>
+  // NOTE: DOMContentLoaded가 load와 다른점은 DOM 로드만 완료 되었을 때 실행 함
+  // load의 경우 다른 리소스가 기다림, 현재 코드 상에는 이벤트만 걸기 때문에 전체 리소스가 필요하지 않음
+  // window.addEventListener('load', function onLoad() {
+  /* window.addEventListener('DOMContentLoaded', function onLoad() {
+  const ilbuniC = document.querySelector('.ilbuni:nth-child(3)');
 
-      function clickIlbuniHandler() {
-        ilbuniC.classList.toggle('special');
-      }
-    
-      ilbuniC.addEventListener('click', clickIlbuniHandler);
-    }); */
+  function clickIlbuniHandler() {
+    ilbuniC.classList.toggle('special');
+  }
 
-      // body 부분에 스크립트를 실행하기 때문에 이벤트 리스너를 사용할 필요없음
-      // 다만 전역변수로써 사용하지 않게 하기 위해 즉시실행함수로 수행
-      (function init() {
-        const characters = document.querySelector('.characters');
+  ilbuniC.addEventListener('click', clickIlbuniHandler);
+}); */
 
-        function clickHandler(event) {
-          console.log(this);
-          console.log(event.currentTarget);
-          console.log(event.target);
-        }
+  // body 부분에 스크립트를 실행하기 때문에 이벤트 리스너를 사용할 필요없음
+  // 다만 전역변수로써 사용하지 않게 하기 위해 즉시실행함수로 수행
+  (function init() {
+    const characters = document.querySelector('.characters');
 
-        characters.addEventListener('click', clickHandler);
-      })();
-    </script>
-  </body>
+    function clickHandler(event) {
+      console.log(this);
+      console.log(event.currentTarget);
+      console.log(event.target);
+    }
+
+    characters.addEventListener('click', clickHandler);
+  })();
+</script>
+</body>
 </html>

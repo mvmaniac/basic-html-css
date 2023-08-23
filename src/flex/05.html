@@ -1,53 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>05. 반응형 컬럼</title>
-    <link rel="stylesheet" href="css/default.css" />
-    <style>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05. 반응형 컬럼</title>
+  <link rel="stylesheet" href="css/default.css" />
+  <style>
+    .flex-container {
+      display: flex;
+      flex-flow: column nowrap;
+      min-height: 100vh;
+      border: 10px solid red;
+    }
+
+    .flex-item {
+      flex: 1 auto;
+    }
+
+    @media (min-width: 600px) {
       .flex-container {
-        display: flex;
-        flex-flow: column nowrap;
-        min-height: 100vh;
-        border: 10px solid red;
+        flex-flow: row wrap;
       }
 
       .flex-item {
-        flex: 1 auto;
+        width: 50%;
+        /* flex: 0 auto; */
+        /* flex-basis: 50%; */
       }
+    }
 
-      @media (min-width: 600px) {
-        .flex-container {
-          flex-flow: row wrap;
-        }
-
-        .flex-item {
-          width: 50%;
-          /* flex: 0 auto; */
-          /* flex-basis: 50%; */
-        }
+    @media (min-width: 900px) {
+      .flex-item {
+        width: 30%;
       }
+    }
+  </style>
+</head>
 
-      @media (min-width: 900px) {
-        .flex-item {
-          width: 30%;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="flex-container">
-      <div class="flex-item">AAAAAAAAAA</div>
-      <div class="flex-item">BB</div>
-      <div class="flex-item">CCCCCC</div>
-      <div class="flex-item">AAAAAAAAAA</div>
-      <div class="flex-item">BB</div>
-      <div class="flex-item">CCCCCC</div>
-      <div class="flex-item">AAAAAAAAAA</div>
-      <div class="flex-item">BB</div>
-      <div class="flex-item">CCCCCC</div>
-    </div>
-  </body>
+<body>
+<div class="flex-container">
+  <div class="flex-item">AAAAAAAAAA</div>
+  <div class="flex-item">BB</div>
+  <div class="flex-item">CCCCCC</div>
+  <div class="flex-item">AAAAAAAAAA</div>
+  <div class="flex-item">BB</div>
+  <div class="flex-item">CCCCCC</div>
+  <div class="flex-item">AAAAAAAAAA</div>
+  <div class="flex-item">BB</div>
+  <div class="flex-item">CCCCCC</div>
+</div>
+</body>
 </html>

@@ -135,5 +135,5 @@ Character.prototype = {
     self.mainElem.style.left = `${self.xPos}%`;
 
     self.rafId = requestAnimationFrame(self.run.bind(self));
-  }
+  },
 };

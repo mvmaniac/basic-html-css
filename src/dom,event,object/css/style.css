@@ -28,7 +28,7 @@
 body {
   height: 500vw;
   font-family: 'Apple SD Gothic Neo', 'Roboto', 'Noto Sans KR', NanumGothic,
-    'Malgun Gothic', sans-serif;
+  'Malgun Gothic', sans-serif;
   -webkit-overflow-scrolling: touch;
   color: #555;
   background: #fff000;
@@ -138,15 +138,19 @@ body[data-char='ragirl'] {
   height: 15.58vw;
   transform-style: preserve-3d;
 }
+
 .character[data-direction='forward'] {
   transform: rotateY(180deg);
 }
+
 .character[data-direction='backward'] {
   transform: rotateY(0deg);
 }
+
 .character[data-direction='left'] {
   transform: rotateY(-90deg);
 }
+
 .character[data-direction='right'] {
   transform: rotateY(90deg);
 }
@@ -169,6 +173,7 @@ body[data-char='ragirl'] {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 .character-face.face-back {
   transform: rotateY(180deg);
 }
@@ -180,12 +185,13 @@ body[data-char='ragirl'] {
   width: calc(770 / 856 * 100%);
   height: calc(648 / 1334 * 100%);
   transform-origin: center bottom;
-  animation: ani-head 0.6s infinite alternate
-    cubic-bezier(0.46, 0.18, 0.66, 0.93);
+  animation: ani-head 0.6s infinite alternate cubic-bezier(0.46, 0.18, 0.66, 0.93);
 }
+
 .character-head-face.face-front {
   background-image: url('../images/ilbuni_head_front.png');
 }
+
 .character-head-face.face-back {
   background-image: url('../images/ilbuni_head_back.png');
 }
@@ -198,9 +204,11 @@ body[data-char='ragirl'] {
   height: calc(385 / 1334 * 100%);
   transform-origin: center center;
 }
+
 .character-torso-face.face-front {
   background-image: url('../images/ilbuni_body_front.png');
 }
+
 .character-torso-face.face-back {
   background-image: url('../images/ilbuni_body_back.png');
 }
@@ -212,9 +220,11 @@ body[data-char='ragirl'] {
   height: calc(307 / 1334 * 100%);
   transform-origin: right top;
 }
+
 .character-arm-right .face-front {
   background-image: url('../images/ilbuni_arm_0.png');
 }
+
 .character-arm-right .face-back {
   background-image: url('../images/ilbuni_arm_1.png');
 }
@@ -226,9 +236,11 @@ body[data-char='ragirl'] {
   height: calc(307 / 1334 * 100%);
   transform-origin: left top;
 }
+
 .character-arm-left .face-front {
   background-image: url('../images/ilbuni_arm_1.png');
 }
+
 .character-arm-left .face-back {
   background-image: url('../images/ilbuni_arm_0.png');
 }
@@ -240,9 +252,11 @@ body[data-char='ragirl'] {
   height: calc(300 / 1334 * 100%);
   transform-origin: center top;
 }
+
 .character-leg-right .face-front {
   background-image: url('../images/ilbuni_leg_0.png');
 }
+
 .character-leg-right .face-back {
   background-image: url('../images/ilbuni_leg_1.png');
 }
@@ -254,9 +268,11 @@ body[data-char='ragirl'] {
   height: calc(300 / 1334 * 100%);
   transform-origin: center top;
 }
+
 .character-leg-left .face-front {
   background-image: url('../images/ilbuni_leg_1.png');
 }
+
 .character-leg-left .face-back {
   background-image: url('../images/ilbuni_leg_0.png');
 }
@@ -264,9 +280,11 @@ body[data-char='ragirl'] {
 .character.running .character-leg-right {
   animation: ani-running-leg 0.2s alternate infinite linear;
 }
+
 .character.running .character-leg-left {
   animation: ani-running-leg 0.2s alternate-reverse infinite linear;
 }
+
 .character.running .character-arm {
   animation: ani-running-arm 0.2s alternate infinite linear;
 }
@@ -281,9 +299,11 @@ body[data-char='ragirl'] .character-head {
   width: calc(920 / 948 * 100%);
   height: calc(750 / 1340 * 100%);
 }
+
 body[data-char='ragirl'] .character-head-face.face-front {
   background-image: url('../images/ragirl_head_front.png');
 }
+
 body[data-char='ragirl'] .character-head-face.face-back {
   background-image: url('../images/ragirl_head_back.png');
 }
@@ -296,9 +316,11 @@ body[data-char='ragirl'] .character-torso {
   height: calc(444 / 1340 * 100%);
   transform-origin: center center;
 }
+
 body[data-char='ragirl'] .character-torso-face.face-front {
   background-image: url('../images/ragirl_body_front.png');
 }
+
 body[data-char='ragirl'] .character-torso-face.face-back {
   background-image: url('../images/ragirl_body_back.png');
 }
@@ -310,9 +332,11 @@ body[data-char='ragirl'] .character-arm-right {
   height: calc(300 / 1340 * 100%);
   transform-origin: right top;
 }
+
 body[data-char='ragirl'] .character-arm-right .face-front {
   background-image: url('../images/ragirl_arm_0_front.png');
 }
+
 body[data-char='ragirl'] .character-arm-right .face-back {
   background-image: url('../images/ragirl_arm_1_back.png');
 }
@@ -324,9 +348,11 @@ body[data-char='ragirl'] .character-arm-left {
   height: calc(300 / 1340 * 100%);
   transform-origin: left top;
 }
+
 body[data-char='ragirl'] .character-arm-left .face-front {
   background-image: url('../images/ragirl_arm_1_front.png');
 }
+
 body[data-char='ragirl'] .character-arm-left .face-back {
   background-image: url('../images/ragirl_arm_0_back.png');
 }
@@ -338,9 +364,11 @@ body[data-char='ragirl'] .character-leg-right {
   height: calc(264 / 1340 * 100%);
   transform-origin: center top;
 }
+
 body[data-char='ragirl'] .character-leg-right .face-front {
   background-image: url('../images/ragirl_leg_0.png');
 }
+
 body[data-char='ragirl'] .character-leg-right .face-back {
   background-image: url('../images/ragirl_leg_1.png');
 }
@@ -352,9 +380,11 @@ body[data-char='ragirl'] .character-leg-left {
   height: calc(264 / 1340 * 100%);
   transform-origin: center top;
 }
+
 body[data-char='ragirl'] .character-leg-left .face-front {
   background-image: url('../images/ragirl_leg_1.png');
 }
+
 body[data-char='ragirl'] .character-leg-left .face-back {
   background-image: url('../images/ragirl_leg_0.png');
 }
@@ -395,6 +425,7 @@ body[data-char='ragirl'] .character-leg-left .face-back {
 body[data-char='ragirl'] .select-character-btn-ilbuni {
   opacity: 0.5;
 }
+
 body[data-char='ilbuni'] .select-character-btn-ilbuni,
 body[data-char='ragirl'] .select-character-btn-ragirl {
   opacity: 1;

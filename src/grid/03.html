@@ -1,37 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>03. 셀 간격 만들기</title>
-    <link rel="stylesheet" href="css/default.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>03. 셀 간격 만들기</title>
+  <link rel="stylesheet" href="css/default.css" />
 
-    <style>
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, minmax(200px, auto));
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, minmax(200px, auto));
 
-        /* row-gap: 20px; */
-        /* column-gap: 20px; */
+      /* row-gap: 20px; */
+      /* column-gap: 20px; */
 
-        /* grid-gap: 20px; */ /* 예전 방법 */
-        gap: 20px;
-      }
-    </style>
-  </head>
+      /* grid-gap: 20px; */ /* 예전 방법 */
+      gap: 20px;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="grid-container">
-      <div class="grid-item">A</div>
-      <div class="grid-item">B</div>
-      <div class="grid-item">C</div>
-      <div class="grid-item">D</div>
-      <div class="grid-item">E</div>
-      <div class="grid-item">F</div>
-      <div class="grid-item">G</div>
-      <div class="grid-item">H</div>
-      <div class="grid-item">I</div>
-    </div>
-  </body>
+<body>
+<div class="grid-container">
+  <div class="grid-item">A</div>
+  <div class="grid-item">B</div>
+  <div class="grid-item">C</div>
+  <div class="grid-item">D</div>
+  <div class="grid-item">E</div>
+  <div class="grid-item">F</div>
+  <div class="grid-item">G</div>
+  <div class="grid-item">H</div>
+  <div class="grid-item">I</div>
+</div>
+</body>
 </html>

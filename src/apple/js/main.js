@@ -24,7 +24,7 @@
         messageD: document.querySelector('#scroll-section-0 .main-message.d'),
         canvas: document.querySelector('#video-canvas-0'),
         context: document.querySelector('#video-canvas-0').getContext('2d'),
-        images: []
+        images: [],
       },
       values: {
         imageCount: 300,
@@ -57,8 +57,8 @@
         // prettier-ignore
         translateYOutOfMessageC: {min: 0, max: -20, play: {start: 0.65, end: 0.7}},
         // prettier-ignore
-        translateYOutOfMessageD: {min: 0, max: -20, play: {start: 0.85, end: 0.9}}
-      }
+        translateYOutOfMessageD: {min: 0, max: -20, play: {start: 0.85, end: 0.9}},
+      },
     },
     {
       // scroll-section-1
@@ -67,8 +67,8 @@
       scrollHeight: 0,
       objects: {
         container: document.querySelector('#scroll-section-1'),
-        content: document.querySelector('#scroll-section-1 .description')
-      }
+        content: document.querySelector('#scroll-section-1 .description'),
+      },
     },
     {
       // scroll-section-2
@@ -84,7 +84,7 @@
         pinC: document.querySelector('#scroll-section-2 .c .pin'),
         canvas: document.querySelector('#video-canvas-1'),
         context: document.querySelector('#video-canvas-1').getContext('2d'),
-        images: []
+        images: [],
       },
       values: {
         imageCount: 960,
@@ -109,8 +109,8 @@
         translateYOutOfMessageC: { min: 0, max: -20, play: { start: 0.95, end: 1 } },
 
         scaleYOfPinB: { min: 0.5, max: 1, play: { start: 0.6, end: 0.65 } },
-        scaleYOfPinC: { min: 0.5, max: 1, play: { start: 0.87, end: 0.92 } }
-      }
+        scaleYOfPinC: { min: 0.5, max: 1, play: { start: 0.87, end: 0.92 } },
+      },
     },
     {
       // scroll-section-3
@@ -124,7 +124,7 @@
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
         tempContext: document.createElement('canvas').getContext('2d'),
         images: [],
-        messageA: document.querySelector('#scroll-section-3 .main-message.a')
+        messageA: document.querySelector('#scroll-section-3 .main-message.a'),
       },
       values: {
         imageCount: 2,
@@ -136,9 +136,9 @@
         translateYOfCanvasCaption: { min: 20, max: 0, play: { start: 0, end: 0 } },
         rectStartY: 0,
         opacityInOfMessageA: { min: 0, max: 1, play: { start: 0, end: 0 } },
-        opacityOutOfMessageA: { min: 1, max: 0, play: { start: 0, end: 0 } }
-      }
-    }
+        opacityOutOfMessageA: { min: 1, max: 0, play: { start: 0, end: 0 } },
+      },
+    },
   ];
 
   function checkMenu() {
@@ -386,7 +386,7 @@
             0,
             0,
             objects.canvas.width,
-            objects.canvas.height
+            objects.canvas.height,
           );
 
           // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
@@ -405,14 +405,14 @@
             values.rect1X.min,
             0,
             parseInt(whiteRectWidth, 10),
-            objects.canvas.height
+            objects.canvas.height,
           );
 
           objects.context.fillRect(
             values.rect2X.min,
             0,
             parseInt(whiteRectWidth, 10),
-            objects.canvas.height
+            objects.canvas.height,
           );
         }
 
@@ -441,7 +441,7 @@
           0,
           0,
           objects.canvas.width,
-          objects.canvas.height
+          objects.canvas.height,
         );
 
         // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
@@ -477,14 +477,14 @@
           parseInt(calculateValues(values.rect1X, currentYOffset), 10),
           0,
           parseInt(whiteRectWidth, 10),
-          objects.canvas.height
+          objects.canvas.height,
         );
 
         objects.context.fillRect(
           parseInt(calculateValues(values.rect2X, currentYOffset), 10),
           0,
           parseInt(whiteRectWidth, 10),
-          objects.canvas.height
+          objects.canvas.height,
         );
 
         if (scrollRatio < values.rect1X.play.end) {
@@ -513,7 +513,7 @@
             0,
             0,
             objects.canvas.width,
-            objects.canvas.height
+            objects.canvas.height,
           );
 
           objects.context.drawImage(
@@ -525,7 +525,7 @@
             0,
             objects.canvas.height - blendHeight,
             objects.canvas.width,
-            blendHeight
+            blendHeight,
           );
 
           if (scrollRatio > values.blendHeight.play.end) {
@@ -550,7 +550,7 @@
 
             objects.canvasCaption.style.opacity = calculateValues(
               values.opacityOfCanvasCaption,
-              currentYOffset
+              currentYOffset,
             );
 
             values.translateYOfCanvasCaption.play.start = values.opacityOfCanvasCaption.play.start;
@@ -558,7 +558,7 @@
 
             const translateYOfCanvasCaption = calculateValues(
               values.translateYOfCanvasCaption,
-              currentYOffset
+              currentYOffset,
             );
             objects.canvasCaption.style.transform = `translate3d(0, ${translateYOfCanvasCaption}%, 0)`;
           } else {
@@ -573,12 +573,12 @@
           if (scrollRatio < values.opacityOutOfMessageA.play.end + 0.05) {
             objects.messageA.style.opacity = calculateValues(
               values.opacityInOfMessageA,
-              currentYOffset
+              currentYOffset,
             );
           } else {
             objects.messageA.style.opacity = calculateValues(
               values.opacityOutOfMessageA,
-              currentYOffset
+              currentYOffset,
             );
           }
         }

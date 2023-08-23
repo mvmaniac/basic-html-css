@@ -1,85 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transition</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <style>
-      .box-container {
-        display: flex;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transition</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <style>
+    .box-container {
+      display: flex;
+    }
 
-      .box {
-        width: 100px;
-        height: 100px;
-        border: 2px solid black;
-        background: rgba(255, 255, 0, 0.7);
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 2px solid black;
+      background: rgba(255, 255, 0, 0.7);
 
-        /* NOTE: (숫자)로 표현되는 속성의 값이 변화가 있을 때 그 중간 과정을 애니메이션으로 표시 해줌 */
-        transition: 2s;
-      }
+      /* NOTE: (숫자)로 표현되는 속성의 값이 변화가 있을 때 그 중간 과정을 애니메이션으로 표시 해줌 */
+      transition: 2s;
+    }
 
-      .box:hover {
-        /* transform: scale(2); */
-        width: 200px;
-        background: red;
-      }
-    </style>
-  </head>
-  <body>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-      nesciunt officia quos, similique suscipit odit tempora eius rerum
-      voluptate fuga non nam est magni odio a blanditiis placeat veniam tenetur?
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-      inventore praesentium? Mollitia nihil id unde deleniti vitae ex
-      consectetur magni aspernatur aliquid rem autem enim inventore, reiciendis
-      delectus asperiores corrupti? Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Optio ipsa et cupiditate veritatis distinctio
-      repellendus, inventore a ducimus voluptatibus vero cumque deleniti nulla
-      quasi delectus minus itaque. Mollitia, sed quidem. Lorem ipsum dolor sit
-      amet consectetur adipisicing elit. Porro consectetur, animi harum
-      excepturi aspernatur quam adipisci totam eius. Eveniet modi iusto
-      distinctio praesentium illum, labore doloribus nisi tempora maiores
-      officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
-      omnis. Harum esse ex cupiditate eos, sed, error perspiciatis ab animi
-      alias natus magni, rerum eligendi a dolorum asperiores omnis quam! Lorem
-      ipsum dolor sit amet consectetur adipisicing elit. Quae aliquid quia
-      molestias tempora facere dolor porro recusandae repellat voluptates
-      doloribus culpa totam labore nisi officia, earum cum, eius tenetur
-      eveniet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-      nostrum eum dolorum nemo dolore ducimus distinctio illo libero quo tenetur
-      error cupiditate nulla molestias optio delectus ut cum, deleniti alias!
-    </p>
-    <div class="box-container">
-      <div class="box">A</div>
-      <div class="box">B</div>
-      <div class="box">C</div>
-      <div class="box">D</div>
-      <div class="box">E</div>
-    </div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-      nesciunt officia quos, similique suscipit odit tempora eius rerum
-      voluptate fuga non nam est magni odio a blanditiis placeat veniam tenetur?
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-      inventore praesentium? Mollitia nihil id unde deleniti vitae ex
-      consectetur magni aspernatur aliquid rem autem enim inventore, reiciendis
-      delectus asperiores corrupti? Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Optio ipsa et cupiditate veritatis distinctio
-      repellendus, inventore a ducimus voluptatibus vero cumque deleniti nulla
-      quasi delectus minus itaque. Mollitia, sed quidem. Lorem ipsum dolor sit
-      amet consectetur adipisicing elit. Porro consectetur, animi harum
-      excepturi aspernatur quam adipisci totam eius. Eveniet modi iusto
-      distinctio praesentium illum, labore doloribus nisi tempora maiores
-      officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
-      omnis. Harum esse ex cupiditate eos, sed, error perspiciatis ab animi
-      alias natus magni, rerum eligendi a dolorum asperiores omnis quam! Lorem
-      ipsum dolor sit amet consectetur, adipisicing elit. Provident ipsa sed ea
-      nesciunt neque at eveniet corporis temporibus voluptates voluptas
-      necessitatibus a officia impedit aliquid, saepe quia libero perspiciatis
-      modi.
-    </p>
-  </body>
+    .box:hover {
+      /* transform: scale(2); */
+      width: 200px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+  nesciunt officia quos, similique suscipit odit tempora eius rerum
+  voluptate fuga non nam est magni odio a blanditiis placeat veniam tenetur?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
+  inventore praesentium? Mollitia nihil id unde deleniti vitae ex
+  consectetur magni aspernatur aliquid rem autem enim inventore, reiciendis
+  delectus asperiores corrupti? Lorem ipsum dolor sit amet consectetur
+  adipisicing elit. Optio ipsa et cupiditate veritatis distinctio
+  repellendus, inventore a ducimus voluptatibus vero cumque deleniti nulla
+  quasi delectus minus itaque. Mollitia, sed quidem. Lorem ipsum dolor sit
+  amet consectetur adipisicing elit. Porro consectetur, animi harum
+  excepturi aspernatur quam adipisci totam eius. Eveniet modi iusto
+  distinctio praesentium illum, labore doloribus nisi tempora maiores
+  officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+  omnis. Harum esse ex cupiditate eos, sed, error perspiciatis ab animi
+  alias natus magni, rerum eligendi a dolorum asperiores omnis quam! Lorem
+  ipsum dolor sit amet consectetur adipisicing elit. Quae aliquid quia
+  molestias tempora facere dolor porro recusandae repellat voluptates
+  doloribus culpa totam labore nisi officia, earum cum, eius tenetur
+  eveniet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+  nostrum eum dolorum nemo dolore ducimus distinctio illo libero quo tenetur
+  error cupiditate nulla molestias optio delectus ut cum, deleniti alias!
+</p>
+<div class="box-container">
+  <div class="box">A</div>
+  <div class="box">B</div>
+  <div class="box">C</div>
+  <div class="box">D</div>
+  <div class="box">E</div>
+</div>
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+  nesciunt officia quos, similique suscipit odit tempora eius rerum
+  voluptate fuga non nam est magni odio a blanditiis placeat veniam tenetur?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
+  inventore praesentium? Mollitia nihil id unde deleniti vitae ex
+  consectetur magni aspernatur aliquid rem autem enim inventore, reiciendis
+  delectus asperiores corrupti? Lorem ipsum dolor sit amet consectetur
+  adipisicing elit. Optio ipsa et cupiditate veritatis distinctio
+  repellendus, inventore a ducimus voluptatibus vero cumque deleniti nulla
+  quasi delectus minus itaque. Mollitia, sed quidem. Lorem ipsum dolor sit
+  amet consectetur adipisicing elit. Porro consectetur, animi harum
+  excepturi aspernatur quam adipisci totam eius. Eveniet modi iusto
+  distinctio praesentium illum, labore doloribus nisi tempora maiores
+  officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+  omnis. Harum esse ex cupiditate eos, sed, error perspiciatis ab animi
+  alias natus magni, rerum eligendi a dolorum asperiores omnis quam! Lorem
+  ipsum dolor sit amet consectetur, adipisicing elit. Provident ipsa sed ea
+  nesciunt neque at eveniet corporis temporibus voluptates voluptas
+  necessitatibus a officia impedit aliquid, saepe quia libero perspiciatis
+  modi.
+</p>
+</body>
 </html>

@@ -1,4 +1,4 @@
-@charset 'utf-8';
+@charset "utf-8";
 
 html {
   font-family: 'Noto Sans KR', sans-serif;
@@ -287,8 +287,8 @@ body.before-load {
 .loading-circle circle {
   stroke: black;
   stroke-width: 4;
-  /* 
-    document.querySelector('.loading-circle circle').getTotalLength()로  
+  /*
+    document.querySelector('.loading-circle circle').getTotalLength()로
     stroke의 길이를 얻어올 수 있음
   */
   stroke-dasharray: 157;

@@ -1,55 +1,57 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        height: 500vh;
-      }
-      body.before-load {
-        overflow-y: hidden;
-      }
-      .sample-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body class="before-load">
-    <video class="sample-video" src="../video/sample-low.mp4" muted></video>
-    <!-- <video class="sample-video" src="../video/sample-high.mp4" muted></video> -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-    <script>
-      const videoElem = document.querySelector('.sample-video');
+    body {
+      height: 500vh;
+    }
 
-      let progress;
-      let currentFrame;
+    body.before-load {
+      overflow-y: hidden;
+    }
 
-      function init() {
-        document.body.classList.remove('before-load');
+    .sample-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="before-load">
+<video class="sample-video" src="../video/sample-low.mp4" muted></video>
+<!-- <video class="sample-video" src="../video/sample-high.mp4" muted></video> -->
 
-        window.addEventListener('scroll', function () {
-          progress =
-            pageYOffset / (document.body.offsetHeight - window.innerHeight); // 스크롤 비율
+<script>
+  const videoElem = document.querySelector('.sample-video');
 
-          console.log(progress);
+  let progress;
+  let currentFrame;
 
-          if (progress < 0) progress = 0;
-          if (progress > 1) progress = 1;
+  function init() {
+    document.body.classList.remove('before-load');
 
-          videoElem.currentTime = videoElem.duration * progress;
-        });
-      }
+    window.addEventListener('scroll', function() {
+      progress = pageYOffset / (document.body.offsetHeight - window.innerHeight); // 스크롤 비율
 
-      window.addEventListener('load', init);
-    </script>
-  </body>
+      console.log(progress);
+
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+
+      videoElem.currentTime = videoElem.duration * progress;
+    });
+  }
+
+  window.addEventListener('load', init);
+</script>
+</body>
 </html>
